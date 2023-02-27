@@ -26,4 +26,12 @@ pilih body -> raw ->json
 }
 </pre>
 
-<img src="https://i.postimg.cc/6pLvDj1Q/postman.png" />
+<table>
+<tr>
+<td><img src="https://i.postimg.cc/mDN2mkLp/postman2.png" /></td>
+</tr>
+<tr>
+<td><img src="https://i.postimg.cc/XvBgBSjY/postman4.png" /></td>
+</tr>
+</table>
+
