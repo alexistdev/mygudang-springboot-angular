@@ -31,7 +31,7 @@ pilih body -> raw ->json
 <td><img src="https://i.postimg.cc/mDN2mkLp/postman2.png" /></td>
 </tr>
 <tr>
-<td><img src="https://i.postimg.cc/XvBgBSjY/postman4.png" /></td>
+<td><img src="https://i.postimg.cc/dtqP2nTY/postman6.png" /></td>
 </tr>
 </table>
 
