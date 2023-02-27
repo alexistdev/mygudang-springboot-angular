@@ -1,10 +1,14 @@
 package com.alexistdev.mygudang.entity;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
 
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
+
+import static jakarta.persistence.TemporalType.TIMESTAMP;
 
 @Entity
 @Table(name="users")
@@ -27,26 +31,22 @@ public class User implements Serializable {
     @Column(name="password")
     private String password;
 
-    @Column(name="created_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date createdAt;
-
-    @Column(name="updated_at", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date updateAt;
-
     @Column(name="isActive")
     private int isActive;
+
+    @CreatedDate
+    @Temporal(TIMESTAMP)
+    private Date createdDate;
 
     public User() {
     }
 
-    public User(int id, String name, String email, String phone, String password, Date createdAt, Date updateAt, int isActive) {
+    public User(int id, String name, String email, String phone, String password, int isActive) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
-        this.createdAt = createdAt;
-        this.updateAt = updateAt;
         this.isActive = isActive;
     }
 
@@ -90,27 +90,19 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Date updateAt) {
-        this.updateAt = updateAt;
-    }
-
     public int getIsActive() {
         return isActive;
     }
 
     public void setIsActive(int isActive) {
         this.isActive = isActive;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date date) {
+        this.createdDate = date;
     }
 }

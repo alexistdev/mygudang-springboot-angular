@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,6 +17,7 @@ public class Userservice {
     private UserDto userDto;
 
     public User save(User user){
+        user.setCreatedDate(new Date());
         return userDto.save(user);
     }
 
