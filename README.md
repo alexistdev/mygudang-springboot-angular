@@ -1,4 +1,4 @@
-# mygudang-springboot-angular
+# mygudang-springboot-angular-android
 Aplikasi Stok Gudang dengan SpringBoot dan Angular [masih on proses]
 
 ## REST API INFO:
@@ -36,3 +36,6 @@ pilih body -> raw ->json
 </tr>
 </table>
 
+## Installasi Angular:
+
+## Installasi Android:
