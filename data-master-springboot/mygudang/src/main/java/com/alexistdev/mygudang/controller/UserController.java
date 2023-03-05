@@ -27,6 +27,11 @@ public class UserController {
         return userservice.findUser(x);
     }
 
+    @DeleteMapping("/{id}")
+    public void removeOne(@PathVariable("id") Long id){
+        userservice.remove(id);
+    }
+
     @PutMapping
     public User update(@RequestBody User user){
         return userservice.save(user);
