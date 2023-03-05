@@ -1,19 +1,16 @@
 package com.alexistdev.mygudang.controller;
 
 import com.alexistdev.mygudang.entity.User;
-import com.alexistdev.mygudang.service.Userservice;
+import com.alexistdev.mygudang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.util.Date;
-import java.util.Optional;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
-    private Userservice userservice;
+    private UserService userservice;
 
     @PostMapping
     public User create(@RequestBody User user){
