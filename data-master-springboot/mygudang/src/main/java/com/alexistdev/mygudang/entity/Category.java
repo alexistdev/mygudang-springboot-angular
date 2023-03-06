@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import static jakarta.persistence.TemporalType.TIMESTAMP;
 
 @Entity
 @Table(name="categories")
-public class Category {
+public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
