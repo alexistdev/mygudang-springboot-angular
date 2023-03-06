@@ -1,8 +1,15 @@
 package com.alexistdev.mygudang.controller;
 
+import com.alexistdev.mygudang.dto.ResponseData;
 import com.alexistdev.mygudang.entity.User;
 import com.alexistdev.mygudang.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,8 +20,19 @@ public class UserController {
     private UserService userservice;
 
     @PostMapping
-    public User create(@RequestBody User user){
-        return userservice.save(user);
+    public ResponseEntity<ResponseData<User>> create(@Valid @RequestBody User user, Errors errors){
+        ResponseData<User> responseData = new ResponseData<>();
+        if (errors.hasErrors()) {
+            for(ObjectError error: errors.getAllErrors()){
+               responseData.getMessages().add(error.getDefaultMessage());
+            }
+            responseData.setStatus(false);
+            responseData.setPayload(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+        responseData.setStatus(true);
+        responseData.setPayload(userservice.save(user));
+        return ResponseEntity.ok(responseData);
     }
 
     @GetMapping
@@ -33,7 +51,18 @@ public class UserController {
     }
 
     @PutMapping
-    public User update(@RequestBody User user){
-        return userservice.save(user);
+    public ResponseEntity<ResponseData<User>> update(@Valid @RequestBody User user, Errors errors){
+        ResponseData<User> responseData = new ResponseData<>();
+        if (errors.hasErrors()) {
+            for(ObjectError error: errors.getAllErrors()){
+                responseData.getMessages().add(error.getDefaultMessage());
+            }
+            responseData.setStatus(false);
+            responseData.setPayload(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+        responseData.setStatus(true);
+        responseData.setPayload(userservice.save(user));
+        return ResponseEntity.ok(responseData);
     }
 }

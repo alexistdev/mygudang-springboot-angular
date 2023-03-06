@@ -1,6 +1,7 @@
 package com.alexistdev.mygudang.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -23,15 +24,18 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty(message="Name is required")
     @Column(name="name")
     private String name;
 
+    @NotEmpty(message="Email is required")
     @Column(name="email", unique = true)
     private String email;
 
-    @Column(name="phone", length= 125)
+    @Column(name="phone", length= 125, nullable = true)
     private String phone;
 
+    @NotEmpty(message = "Password is required")
     @Column(name="password")
     private String password;
 
