@@ -16,7 +16,11 @@
     <properties>
         <java.version>19</java.version>
         <org.projectlombok.version>1.18.26</org.projectlombok.version>
+        <org.modelmapper.version>3.0.0</org.modelmapper.version>
+        <org.springframework.security.version>5.4.6</org.springframework.security.version>
+        <mysql-connector-java.version>8.0.12</mysql-connector-java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -33,12 +37,18 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
-            <version>5.4.6</version>
+            <version>${org.springframework.security.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${org.modelmapper.version}</version>
         </dependency>
 
         <dependency>
@@ -49,7 +59,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.12</version>
+            <version>${mysql-connector-java.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

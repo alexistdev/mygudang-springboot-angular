@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -19,13 +21,29 @@ public class CategoryService {
     private static AtomicLong idCounter = new AtomicLong();
 
     public Category save(Category category){
-        Long categoryId = idCounter.getAndIncrement();
-        if(categoryId == 0L){
-            categoryId = 1L;
+        Long codeId = idCounter.getAndIncrement();
+        if(codeId == 0L){
+            codeId = 1L;
         }
         category.setCreatedDate(date);
         category.setUpdatedDate(date);
-        category.setCode(String.valueOf(categoryId));
+        category.setCode(String.valueOf(codeId));
         return categoryRepository.save(category);
+    }
+
+    public Category findOne(UUID id){
+        Optional<Category> category= categoryRepository.findById(id);
+        if(!category.isPresent()){
+            return null;
+        }
+        return category.get();
+    }
+
+    public Iterable<Category> findAll(){
+        return categoryRepository.findAll();
+    }
+
+    public void removeOne(UUID id){
+        categoryRepository.deleteById(id);
     }
 }

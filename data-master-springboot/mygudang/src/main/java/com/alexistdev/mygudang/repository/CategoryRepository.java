@@ -4,8 +4,8 @@ import com.alexistdev.mygudang.entity.Category;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.UUID;
 
-public interface CategoryRepository extends CrudRepository<Category,Long> {
+public interface CategoryRepository extends CrudRepository<Category, UUID> {
 
-    List<Category> findByNameContains(String name);
 }
