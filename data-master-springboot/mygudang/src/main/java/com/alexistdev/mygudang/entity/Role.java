@@ -25,6 +25,9 @@ public class Role implements Serializable {
     @Column(name="name")
     private String name;
 
+    @Column(name="level")
+    private int level;
+
     @CreatedDate
     @Temporal(TIMESTAMP)
     private Date createdAt;
@@ -36,12 +39,51 @@ public class Role implements Serializable {
     public Role() {
     }
 
-    public Role(int id, String name, Date createdAt, Date updatedAt) {
+    public Role(int id, String name, int level, Date createdAt, Date updatedAt) {
         this.id = id;
         this.name = name;
+        this.level = level;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
