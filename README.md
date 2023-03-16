@@ -37,5 +37,8 @@ pilih body -> raw ->json
 </table>
 
 ## Installasi Angular:
+- Buka directory frontend setelah anda clone
+- jalankan terminal dan ketik: npm install
+- jalankan terminal dan ketik: npm run start
 
 ## Installasi Android:
