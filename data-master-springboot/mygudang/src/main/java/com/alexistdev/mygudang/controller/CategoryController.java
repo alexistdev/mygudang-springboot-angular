@@ -2,6 +2,7 @@ package com.alexistdev.mygudang.controller;
 
 import com.alexistdev.mygudang.dto.ResponseData;
 import com.alexistdev.mygudang.entity.Category;
+import com.alexistdev.mygudang.response.CommonResponse;
 import com.alexistdev.mygudang.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +18,33 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/category")
 public class CategoryController {
+
+    public static final String ADD_CATEGORY = "/add";
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping
+    @PostMapping(value = ADD_CATEGORY)
     public ResponseEntity<ResponseData<Category>> create(@Valid @RequestBody Category category, Errors errors){
         ResponseData<Category> responseData = new ResponseData<>();
-        if (errors.hasErrors()) {
-            for(ObjectError error: errors.getAllErrors()){
-                responseData.getMessages().add(error.getDefaultMessage());
+        try{
+            if (errors.hasErrors()) {
+                for(ObjectError error: errors.getAllErrors()){
+                    responseData.getMessages().add(error.getDefaultMessage());
+                }
+                responseData.setStatus(false);
+                responseData.setPayload(null);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
             }
-            responseData.setStatus(false);
-            responseData.setPayload(null);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+            responseData.setStatus(true);
+            responseData.setPayload(categoryService.save(category));
+            return ResponseEntity.ok(responseData);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
         }
-        responseData.setStatus(true);
-        responseData.setPayload(categoryService.save(category));
-        return ResponseEntity.ok(responseData);
     }
+
+//    private boolean hasDuplicate(Category category){
+//
+//    }
 }
