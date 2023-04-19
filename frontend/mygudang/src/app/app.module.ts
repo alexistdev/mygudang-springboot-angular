@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AdminTemplateComponent } from './Admin/admin-template/admin-template.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import {AdministrationModule} from "./administration/administration.module";
+import {RouterModule} from "@angular/router";
+import {AppRouteModule} from "./app-route/app-route.module";
+import {LoginModule} from "./login/login.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminTemplateComponent,
-    LoginComponent,
-    RegisterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AdministrationModule,
+    RouterModule,
+    AppRouteModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]
