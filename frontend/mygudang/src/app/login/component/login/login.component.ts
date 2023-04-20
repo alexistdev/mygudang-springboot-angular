@@ -36,21 +36,21 @@ export class LoginComponent implements OnInit, AfterViewInit{
   doLogin():void {
     if(this.loginForm.valid){
       this.loginForm.disable();
-      // this.loginService.doUserLogin(this.loginForm.controls['emailUn'].value, this.loginForm.controls['pw'].value).subscribe(
-      //   (res) => {
-      //     if(res){
-      //       this.router.navigate(['/home'])
-      //     } else {
-      //       this.error = true;
-      //     }
-      //     this.loginForm.enable();
-      //     this.doReset();
-      //   },(err)=>{
-      //     this.error = true;
-      //     this.loginForm.enable();
-      //     this.doReset();
-      //   }
-      // );
+      this.loginService.doUserLogin(this.loginForm.controls['emailUn'].value, this.loginForm.controls['pw'].value).subscribe(
+        (res) => {
+          if(res){
+            this.router.navigate(['/home'])
+          } else {
+            this.error = true;
+          }
+          this.loginForm.enable();
+          this.doReset();
+        },(err)=>{
+          this.error = true;
+          this.loginForm.enable();
+          this.doReset();
+        }
+      );
       this.error = false;
     } else {
       this.doReset();
