@@ -1,4 +1,6 @@
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class LocalStorageService {
   setItem(key: string, val:string):void {
     sessionStorage.setItem(key,val);

@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
+import {LoginService} from "../../service/login.service";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit, AfterViewInit{
   constructor(
               private route: ActivatedRoute,
               private router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private loginService: LoginService) {
   }
 
   ngOnInit(): void {
@@ -33,6 +35,22 @@ export class LoginComponent implements OnInit, AfterViewInit{
 
   doLogin():void {
     if(this.loginForm.valid){
+      this.loginForm.disable();
+      // this.loginService.doUserLogin(this.loginForm.controls['emailUn'].value, this.loginForm.controls['pw'].value).subscribe(
+      //   (res) => {
+      //     if(res){
+      //       this.router.navigate(['/home'])
+      //     } else {
+      //       this.error = true;
+      //     }
+      //     this.loginForm.enable();
+      //     this.doReset();
+      //   },(err)=>{
+      //     this.error = true;
+      //     this.loginForm.enable();
+      //     this.doReset();
+      //   }
+      // );
       this.error = false;
     } else {
       this.doReset();

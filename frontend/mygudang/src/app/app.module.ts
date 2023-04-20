@@ -6,6 +6,8 @@ import {AdministrationModule} from "./administration/administration.module";
 import {RouterModule} from "@angular/router";
 import {AppRouteModule} from "./app-route/app-route.module";
 import {LoginModule} from "./login/login.module";
+import {HttpClientModule} from "@angular/common/http";
+import {LocalStorageService} from "./config/service/local-storage.service";
 
 @NgModule({
   declarations: [
@@ -16,9 +18,13 @@ import {LoginModule} from "./login/login.module";
     AdministrationModule,
     RouterModule,
     AppRouteModule,
-    LoginModule
+    LoginModule,
+    HttpClientModule,
+
   ],
-  providers: [],
+  providers: [
+    LocalStorageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
