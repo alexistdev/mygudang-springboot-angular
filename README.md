@@ -41,4 +41,10 @@ pilih body -> raw ->json
 - jalankan terminal dan ketik: npm install
 - jalankan terminal dan ketik: npm run start
 
+<table>
+<tr>
+<td><img src="https://i.postimg.cc/hjJ7Qr2q/back.png" /></td>
+</tr>
+</table>
+
 ## Installasi Android:
