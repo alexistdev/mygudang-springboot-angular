@@ -11,18 +11,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.SecureRandom;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class AuthController {
     public static final String LOGIN = "/login";
+    public static final String TEST = "/test";
 
     @Autowired
     private UserService userservice;
@@ -51,4 +50,10 @@ public class AuthController {
         }
     }
 
+    @GetMapping(value = TEST)
+    public ResponseEntity<ResponseData<User>> doTesting(){
+        ResponseData<User> responseData = new ResponseData<>();
+        responseData.setStatus(true);
+        return ResponseEntity.ok(responseData);
+    }
 }
