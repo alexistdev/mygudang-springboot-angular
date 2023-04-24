@@ -22,9 +22,9 @@ export class LoginService {
 
   doUserLogin(userName: string, userPwd: string): Observable<boolean>{
     return new Observable((observer: Observer<any>) => {
-      this.http.get(' localhost:8081/api/auth/test')
-      // this.http.get(' localhost:8081/api/auth/test', {'un': userName , 'pw' : userPwd})
+      this.http.post('http://localhost:8081/api/auth/login', {'un': userName , 'pw' : userPwd})
         .subscribe((res)=>{
+          console.log(res);
           if(res){
             observer.next(true);
           } else {
@@ -34,26 +34,5 @@ export class LoginService {
           observer.next(false);
         });
     });
-    // return Observable.create((obs) =>{
-    //   this.http.post('http://localhost:8000/iam/login', {'un': userName , 'pw' : userPwd})
-    //     .subscribe((res)=>{
-    //       if(res){
-    //         obs.next(true);
-    //       } else {
-    //         obs.next(false);
-    //       }
-    //     },(error) => {
-    //       obs.next(false);
-    //     });
-    //   //   .map((resp:Response) => resp.json()).subscribe((res):void => {
-    //   //     if(res){
-    //   //       obs.next(true);
-    //   //     } else {
-    //   //       obs.next(false);
-    //   //     }
-    //   // }, (err):void =>{
-    //   //     obs.next(false);
-    //   //   });
-    // });
   }
 }

@@ -58,14 +58,16 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "mygudang:build",
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "mygudang:build:production",
-              "proxyConfig": "src/proxy.conf.json"
+              "browserTarget": "mygudang:build:production"
             },
             "development": {
-              "browserTarget": "mygudang:build:development",
-              "proxyConfig": "src/proxy.conf.json"
+              "browserTarget": "mygudang:build:development"
             }
           },
           "defaultConfiguration": "development"

@@ -1,7 +1,10 @@
 {
-  "/api/auth/test": {
+  "/api/": {
     "target": "http://localhost:8081",
     "secure": false,
-    "logLevel": "debug"
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": ""
+    }
   }
 }
