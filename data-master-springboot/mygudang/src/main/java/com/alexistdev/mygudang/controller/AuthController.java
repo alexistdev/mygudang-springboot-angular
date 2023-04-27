@@ -4,17 +4,11 @@ import com.alexistdev.mygudang.dto.LoginDTO;
 import com.alexistdev.mygudang.dto.ResponseData;
 import com.alexistdev.mygudang.entity.User;
 import com.alexistdev.mygudang.service.UserService;
+import com.alexistdev.mygudang.service.UserServiceold;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.SecureRandom;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -31,23 +25,24 @@ public class AuthController {
 
 
     @PostMapping(value = LOGIN)
-    public ResponseEntity<ResponseData<User>> doLogin(@RequestBody LoginDTO user){
-        try{
+    public ResponseEntity<ResponseData<User>> doLogin(@RequestBody LoginDTO user) throws Exception {
+//    public String doLogin(@RequestBody LoginDTO user) throws Exception {
+
             ResponseData<User> responseData = new ResponseData<>();
-            User whoIam = this.userservice.findByEmail(user.getUn());
+            User whoIam = userservice.findByEmail(user.getUn());
+
 //            if(whoIam != null){
 //                if(whoIam.getPassword().equals(passwordEncoder.encode(user.getPw()))){
                     responseData.setStatus(true);
                     responseData.setPayload(whoIam);
+//                    return "okay";
                     return ResponseEntity.ok(responseData);
 //                }
 //            }
 //            responseData.setStatus(false);
 //            responseData.setPayload(null);
 //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
-        }catch (Exception e){
-            throw e;
-        }
+
     }
 
     @GetMapping(value = TEST)
