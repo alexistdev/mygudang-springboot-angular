@@ -6,47 +6,58 @@ import com.alexistdev.mygudang.entity.User;
 import com.alexistdev.mygudang.service.UserService;
 import com.alexistdev.mygudang.service.UserServiceold;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:4200/")
 public class AuthController {
     public static final String LOGIN = "/login";
     public static final String TEST = "/test";
 
-    @Autowired
+
     private UserService userservice;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
+    public AuthController(UserService userservice) {
+        this.userservice = userservice;
+    }
 
     @PostMapping(value = LOGIN)
     public ResponseEntity<ResponseData<User>> doLogin(@RequestBody LoginDTO user) throws Exception {
 //    public String doLogin(@RequestBody LoginDTO user) throws Exception {
-
-            ResponseData<User> responseData = new ResponseData<>();
-            User whoIam = userservice.findByEmail(user.getUn());
-
-//            if(whoIam != null){
-//                if(whoIam.getPassword().equals(passwordEncoder.encode(user.getPw()))){
-                    responseData.setStatus(true);
-                    responseData.setPayload(whoIam);
-//                    return "okay";
-                    return ResponseEntity.ok(responseData);
-//                }
+        List<String> message = new ArrayList<>();
+        ResponseData<User> responseData = new ResponseData<>();
+        User whoIam = userservice.findByEmail(user.getUn());
+        if(whoIam != null){
+            if(userservice.authenticateLogin(user.getPw(),whoIam.getPassword())){
+                responseData.setStatus(true);
+                responseData.setPayload(whoIam);
+                return ResponseEntity.ok(responseData);
+            }
+//            String password = user.getPw();
+//            String passwordHash = passwordEncoder.encode(password);
+//            if (passwordHash.equals(whoIam.getPassword())) {
+//                responseData.setStatus(true);
+//                responseData.setPayload(whoIam);
+//                return ResponseEntity.ok(responseData);
 //            }
-//            responseData.setStatus(false);
-//            responseData.setPayload(null);
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+        message.add("Gagal");
+        responseData.setStatus(false);
+        responseData.setMessages(message);
+        responseData.setPayload(null);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
 
     }
 
     @GetMapping(value = TEST)
-    public ResponseEntity<ResponseData<User>> doTesting(){
+    public ResponseEntity<ResponseData<User>> doTesting() {
         ResponseData<User> responseData = new ResponseData<>();
         responseData.setStatus(true);
         return ResponseEntity.ok(responseData);
