@@ -39,7 +39,9 @@ pilih body -> raw ->json
 ## Installasi Angular:
 - Buka directory frontend setelah anda clone
 - jalankan terminal dan ketik: npm install
-- jalankan terminal dan ketik: npm run start
+- jalankan terminal dan ketik: ng serve
+- username: alexistdev@gmail.com
+- password: 1234
 
 <table>
 <tr>
