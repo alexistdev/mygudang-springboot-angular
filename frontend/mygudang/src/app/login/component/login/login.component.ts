@@ -38,13 +38,10 @@ export class LoginComponent implements OnInit, AfterViewInit{
   doLogin():void {
     if(this.loginForm.valid){
       this.loginForm.disable();
-      // this.http.get('http://localhost:8081/api/auth/test').subscribe(res =>{
-      //   alert('singin successfull');
-      // })
       this.loginService.doUserLogin(this.loginForm.controls['emailUn'].value, this.loginForm.controls['pw'].value).subscribe(
         (res) => {
           if(res){
-            this.router.navigate(['/home'])
+            this.router.navigate(['/dashboard'])
           } else {
             this.error = true;
           }
