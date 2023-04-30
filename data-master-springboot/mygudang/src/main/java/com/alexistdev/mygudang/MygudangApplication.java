@@ -1,7 +1,6 @@
 package com.alexistdev.mygudang;
 
 import com.alexistdev.mygudang.entity.User;
-import com.alexistdev.mygudang.repository.UserRepository;
 import com.alexistdev.mygudang.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
