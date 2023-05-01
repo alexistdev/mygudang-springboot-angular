@@ -1,7 +1,9 @@
 package com.alexistdev.mygudang;
 
+import com.alexistdev.mygudang.entity.Permission;
 import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.entity.User;
+import com.alexistdev.mygudang.service.PermissionService;
 import com.alexistdev.mygudang.service.RoleService;
 import com.alexistdev.mygudang.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -26,8 +28,11 @@ public class MygudangApplication {
     @Autowired
     RoleService roleService;
 
+    @Autowired
+    PermissionService permissionService;
+
     @Bean
-    public ModelMapper modelMapper(){
+    public ModelMapper modelMapper() {
         return new ModelMapper();
     }
 
@@ -37,7 +42,7 @@ public class MygudangApplication {
     }
 
     @Bean
-    CommandLineRunner seedUser(){
+    CommandLineRunner seedUser() {
         return args -> {
             User user = new User();
             user.setName("Alex");
@@ -48,7 +53,7 @@ public class MygudangApplication {
     }
 
     @Bean
-    CommandLineRunner seedRole(){
+    CommandLineRunner seedRole() {
         return args -> {
             Role role1 = new Role();
             role1.setName("Superadmin");
@@ -70,4 +75,14 @@ public class MygudangApplication {
             roleService.save(role4);
         };
     }
+
+//    @Bean
+//    CommandLineRunner seedPermission() {
+//        return args -> {
+//            Permission permission1 = new Permission();
+//            permission1.setRoleId(1);
+//            permission1.setSlug("dashboard");
+//            permissionService.save(permission1);
+//        };
+//    }
 }
