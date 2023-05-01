@@ -19,11 +19,13 @@ public class Permission  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotEmpty(message="roleId is required")
-    @Column(name="role_id")
-    private int roleId;
 
-    @NotEmpty(message="Slug is required")
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role roleId;
+
+
     @Column(name="slug")
     private String slug;
 
@@ -38,7 +40,7 @@ public class Permission  implements Serializable {
     public Permission() {
     }
 
-    public Permission(int id, int roleId, String slug, Date createdAt, Date updatedAt) {
+    public Permission(int id, Role roleId, String slug, Date createdAt, Date updatedAt) {
         this.id = id;
         this.roleId = roleId;
         this.slug = slug;

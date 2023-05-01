@@ -1,6 +1,5 @@
 package com.alexistdev.mygudang;
 
-import com.alexistdev.mygudang.entity.Permission;
 import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.entity.User;
 import com.alexistdev.mygudang.service.PermissionService;
