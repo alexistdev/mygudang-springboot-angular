@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -17,13 +20,17 @@ public class UserController {
     private UserService userservice;
 
     @PostMapping
-    public ResponseEntity<User> create(@Valid @RequestBody User user) throws Exception{
+    public ResponseEntity<ResponseData> create(@Valid @RequestBody User user) throws Exception{
         ResponseData<User> responseData = new ResponseData<>();
+        List<String> message = new ArrayList<>();
+        message.add("Data berhasil didapatkan");
         responseData.setStatus(true);
 //        responseData.setPayload(userservice.save(user));
         User data = userservice.save(user);
+        responseData.setPayload(data);
+        responseData.setMessages(message);
 //        return ResponseEntity.ok(responseData);
-        return new ResponseEntity<User>(data, HttpStatus.CREATED);
+        return new ResponseEntity<ResponseData>(responseData, HttpStatus.CREATED);
     }
 
 //    @GetMapping

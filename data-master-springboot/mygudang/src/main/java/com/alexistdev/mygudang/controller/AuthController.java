@@ -20,9 +20,7 @@ public class AuthController {
     public static final String LOGIN = "/login";
     public static final String TEST = "/test";
 
-
     private UserService userservice;
-
 
     public AuthController(UserService userservice) {
         this.userservice = userservice;
@@ -30,30 +28,23 @@ public class AuthController {
 
     @PostMapping(value = LOGIN)
     public ResponseEntity<ResponseData<User>> doLogin(@RequestBody LoginDTO user) throws Exception {
-//    public String doLogin(@RequestBody LoginDTO user) throws Exception {
         List<String> message = new ArrayList<>();
         ResponseData<User> responseData = new ResponseData<>();
         User whoIam = userservice.findByEmail(user.getUn());
         if(whoIam != null){
             if(userservice.authenticateLogin(user.getPw(),whoIam.getPassword())){
                 responseData.setStatus(true);
+                message.add("Data berhasil didapatkan");
+                responseData.setMessages(message);
                 responseData.setPayload(whoIam);
                 return ResponseEntity.ok(responseData);
             }
-//            String password = user.getPw();
-//            String passwordHash = passwordEncoder.encode(password);
-//            if (passwordHash.equals(whoIam.getPassword())) {
-//                responseData.setStatus(true);
-//                responseData.setPayload(whoIam);
-//                return ResponseEntity.ok(responseData);
-//            }
         }
         message.add("Gagal");
         responseData.setStatus(false);
         responseData.setMessages(message);
         responseData.setPayload(null);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
-
     }
 
     @GetMapping(value = TEST)

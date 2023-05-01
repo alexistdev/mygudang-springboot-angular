@@ -2,7 +2,6 @@ package com.alexistdev.mygudang.controller;
 
 import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.service.RoleService;
-import com.alexistdev.mygudang.service.RoleServiceOld;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
