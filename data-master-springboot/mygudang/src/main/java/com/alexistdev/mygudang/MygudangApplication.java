@@ -1,6 +1,8 @@
 package com.alexistdev.mygudang;
 
+import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.entity.User;
+import com.alexistdev.mygudang.service.RoleService;
 import com.alexistdev.mygudang.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class MygudangApplication {
     @Autowired
     UserService userService;
 
+    @Autowired
+    RoleService roleService;
+
     @Bean
     public ModelMapper modelMapper(){
         return new ModelMapper();
@@ -39,6 +44,30 @@ public class MygudangApplication {
             user.setPassword("1234");
             user.setEmail("alexistdev@gmail.com");
             userService.save(user);
+        };
+    }
+
+    @Bean
+    CommandLineRunner seedRole(){
+        return args -> {
+            Role role1 = new Role();
+            role1.setName("Superadmin");
+            role1.setLevel(1);
+            roleService.save(role1);
+            Role role2 = new Role();
+            role2.setName("Admin");
+            role2.setLevel(2);
+            roleService.save(role2);
+
+            Role role3 = new Role();
+            role3.setName("Admin Gudang");
+            role3.setLevel(3);
+            roleService.save(role3);
+
+            Role role4 = new Role();
+            role4.setName("Admin PO");
+            role4.setLevel(4);
+            roleService.save(role4);
         };
     }
 }

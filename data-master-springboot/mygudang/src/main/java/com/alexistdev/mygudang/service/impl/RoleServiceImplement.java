@@ -1,12 +1,17 @@
 package com.alexistdev.mygudang.service.impl;
 
 import com.alexistdev.mygudang.entity.Role;
+import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.service.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 @Repository
 public class RoleServiceImplement implements RoleService {
+
+    @Autowired
+    RoleRepository roleRepository;
 
     @Override
     public Role save(Role role) throws Exception
@@ -17,6 +22,6 @@ public class RoleServiceImplement implements RoleService {
         insertRole.setLevel(role.getLevel());
         insertRole.setCreatedAt(now);
         insertRole.setUpdatedAt(now);
-        return insertRole;
+        return roleRepository.save(insertRole);
     }
 }
