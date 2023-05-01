@@ -16,7 +16,9 @@
                 <div class="form-body">
                   <form class="row g-3" [formGroup]="loginForm">
                     <div class="col-12 justify-content-center" *ngIf="error">
-                      <p>INVALID LOGIN</p>
+                      <div class="alert alert-danger border-0 bg-danger show fade">
+                        <div class="text-light">INVALID LOGIN!</div>
+                      </div>
                     </div>
                     <div class="col-12">
                       <label for="inputEmailAddress" class="form-label">Email</label>
