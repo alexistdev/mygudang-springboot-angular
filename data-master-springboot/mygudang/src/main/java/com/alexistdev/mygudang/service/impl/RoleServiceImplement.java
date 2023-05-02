@@ -24,4 +24,9 @@ public class RoleServiceImplement implements RoleService {
         insertRole.setUpdatedAt(now);
         return roleRepository.save(insertRole);
     }
+
+    @Override
+    public Role getById(String id) throws Exception {
+        return roleRepository.findById(Long.parseLong(id)).orElse(null);
+    }
 }

@@ -23,7 +23,7 @@ public class Permission  implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
-    private Role roleId;
+    private Role role;
 
 
     @Column(name="slug")
@@ -40,9 +40,9 @@ public class Permission  implements Serializable {
     public Permission() {
     }
 
-    public Permission(int id, Role roleId, String slug, Date createdAt, Date updatedAt) {
+    public Permission(int id, Role role, String slug, Date createdAt, Date updatedAt) {
         this.id = id;
-        this.roleId = roleId;
+        this.role = role;
         this.slug = slug;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;

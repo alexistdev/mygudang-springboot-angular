@@ -22,7 +22,7 @@ public class PermissionController {
     PermissionService permissionService;
 
     @PostMapping
-    public ResponseEntity<ResponseData> create(@RequestBody PermissionDTO permission) throws Exception{
+    public ResponseEntity<ResponseData> create(@RequestBody Permission permission) throws Exception{
         ResponseData<Permission> responseData = new ResponseData<>();
         responseData.setStatus(true);
         Permission permissionDTO = permissionService.save(permission);
