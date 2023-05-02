@@ -23,6 +23,9 @@ public class PermissionController {
 
     @PostMapping
     public ResponseEntity<ResponseData> create(@RequestBody Permission permission) throws Exception{
+        if(permission.getSlug().isEmpty()){
+            throw new Exception();
+        }
         ResponseData<Permission> responseData = new ResponseData<>();
         responseData.setStatus(true);
         Permission permissionDTO = permissionService.save(permission);
