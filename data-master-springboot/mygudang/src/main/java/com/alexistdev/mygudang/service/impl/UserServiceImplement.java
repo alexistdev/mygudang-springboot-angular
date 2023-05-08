@@ -23,11 +23,13 @@ public class UserServiceImplement implements UserService {
     @Override
     public User save(User users) throws Exception {
         User insertUser = new User();
+        Date now = new Date();
         insertUser.setName(users.getName());
         insertUser.setEmail(users.getEmail());
         insertUser.setPassword(passwordEncoder.encode(users.getPassword()));
         insertUser.setPhone(users.getPhone());
-        insertUser.setCreatedDate(new Date());
+        insertUser.setCreatedAt(now);
+        insertUser.setUpdatedAt(now);
         return userRepository.save(insertUser);
     }
 
