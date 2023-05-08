@@ -2,12 +2,17 @@ package com.alexistdev.mygudang.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import java.io.Serializable;
 import java.util.Set;
+
+@Getter
+@Setter
 @Entity
 @Table(name="products")
-public class Product implements Serializable {
+public class Product extends AuditEntity {
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
@@ -35,54 +40,4 @@ public class Product implements Serializable {
     )
     private Set<Vendor> vendors;
 
-    public Product() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Set<Vendor> getVendors() {
-        return vendors;
-    }
-
-    public void setVendors(Set<Vendor> vendors) {
-        this.vendors = vendors;
-    }
 }

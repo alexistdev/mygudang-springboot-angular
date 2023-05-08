@@ -14,7 +14,7 @@ import static jakarta.persistence.TemporalType.TIMESTAMP;
 @Setter
 @Entity
 @Table(name="roles")
-public class Role implements Serializable {
+public class Role extends AuditEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,22 +28,4 @@ public class Role implements Serializable {
     @Column(name="level")
     private int level;
 
-    @CreatedDate
-    @Temporal(TIMESTAMP)
-    private Date createdAt;
-
-    @CreatedDate
-    @Temporal(TIMESTAMP)
-    private Date updatedAt;
-
-    public Role() {
-    }
-
-    public Role(int id, String name, int level, Date createdAt, Date updatedAt) {
-        this.id = id;
-        this.name = name;
-        this.level = level;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
 }

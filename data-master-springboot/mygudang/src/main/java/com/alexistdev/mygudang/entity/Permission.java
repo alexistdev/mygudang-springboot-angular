@@ -13,7 +13,7 @@ import static jakarta.persistence.TemporalType.TIMESTAMP;
 @Setter
 @Entity
 @Table(name="permissions")
-public class Permission  extends AuditEntity implements Serializable {
+public class Permission  extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +29,5 @@ public class Permission  extends AuditEntity implements Serializable {
     @Column(name="slug")
     private String slug;
 
-
-    public Permission() {
-    }
 
 }
