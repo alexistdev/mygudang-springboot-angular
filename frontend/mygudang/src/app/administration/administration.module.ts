@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
+import {MyMenuModule} from "../my-menu/my-menu.module";
 
 
 
@@ -11,8 +12,9 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
   exports: [
     DashboardComponent
   ],
-  imports: [
-    CommonModule
-  ]
+    imports: [
+        CommonModule,
+        MyMenuModule
+    ]
 })
 export class AdministrationModule { }
