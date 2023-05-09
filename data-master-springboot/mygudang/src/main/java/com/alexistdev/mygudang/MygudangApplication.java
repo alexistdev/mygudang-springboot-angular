@@ -1,5 +1,6 @@
 package com.alexistdev.mygudang;
 
+import com.alexistdev.mygudang.entity.Permission;
 import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.entity.User;
 import com.alexistdev.mygudang.service.PermissionService;
@@ -64,26 +65,29 @@ public class MygudangApplication {
         };
     }
 
-//    @Bean
-//    CommandLineRunner seedUser() {
-//        return args -> {
-//            Role role = roleService.getById("1");
-//            User user = new User();
-//            user.setName("Alex");
-//            user.setPassword("1234");
-//            user.setEmail("alexistdev@gmail.com");
-//            user.setRole(role);
-//            userService.save(user);
-//        };
-//    }
+    @Bean
+    CommandLineRunner seedUser() {
+        return args -> {
+            Role role = roleService.getById("1");
+            User user = new User();
+            user.setName("Alex");
+            user.setPassword("1234");
+            user.setIsActive(1);
+            user.setPhone("082371408678");
+            user.setEmail("alexistdev@gmail.com");
+            user.setRole(role);
+            userService.save(user);
+        };
+    }
 
-//    @Bean
-//    CommandLineRunner seedPermission() {
-//        return args -> {
-//            Permission permission1 = new Permission();
-//            permission1.setRoleId(1);
-//            permission1.setSlug("dashboard");
-//            permissionService.save(permission1);
-//        };
-//    }
+    @Bean
+    CommandLineRunner seedPermission() {
+        return args -> {
+            Permission permission1 = new Permission();
+            Role role = roleService.getById("1");
+            permission1.setRole(role);
+            permission1.setSlug("/dashboard");
+            permissionService.save(permission1);
+        };
+    }
 }
