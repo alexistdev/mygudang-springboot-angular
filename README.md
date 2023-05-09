@@ -72,7 +72,7 @@ pilih body -> raw ->json
 </td>
 <td>
     {
-    "slug" : "/wakanda",
+    "slug" : "/dashboard",
     "role" : {
         "id" : 1,
         "name": "Admin",
