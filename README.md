@@ -10,6 +10,7 @@ Aplikasi Stok Gudang dengan SpringBoot dan Angular [masih on proses]
 ## Installasi springboot:
 - git clone : https://github.com/alexistdev/mygudang-springboot-angular.git
 - buka folder : data-master-springboot
+- buka file: src/main/resources/application.properties dan ubah port menjadi 8000 atau 8082, sesuaikan dengan kebutuhan anda.
 - Jalankan Xampp dan Buat database kosong dengan nama: mygudang
 - ketik di terminal : mvn install
 - Jalankan springboot : springboot:run
