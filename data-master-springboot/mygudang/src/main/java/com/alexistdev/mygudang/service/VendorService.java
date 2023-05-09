@@ -26,8 +26,8 @@ public class VendorService {
         if(codeId == 0L){
             codeId = 1L;
         }
-        vendor.setCreatedDate(date);
-        vendor.setUpdatedDate(date);
+        vendor.setCreatedAt(date);
+        vendor.setUpdatedAt(date);
         vendor.setCode(String.valueOf(codeId));
         return vendorRepository.save(vendor);
     }
