@@ -24,9 +24,10 @@ export class LoginService {
     return new Observable((observer: Observer<any>) => {
       this.http.post('http://localhost:8082/api/auth/login', {'un': userName , 'pw' : userPwd})
         .subscribe((res)=>{
-          console.log(res);
           if(res){
-            this.localStorageService.setItem("username","alex");
+            let myjson = JSON.parse(JSON.stringify(res));
+            console.log(myjson.data.role.id);
+            this.localStorageService.setItem("role",myjson.data.role.id);
             observer.next(true);
           } else {
             observer.next(false);
