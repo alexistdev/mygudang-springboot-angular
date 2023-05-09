@@ -56,8 +56,8 @@ pilih body -> raw ->json
 <thead>
     <tr>
 <th>No</th>
-<th>EndPoint</th>
-        <th>Deskripsi</th>
+<th>Deskripsi</th>
+        <th>Endpoint</th>
 <th>Method</th>
 <th>Payload</th>
 </tr>
