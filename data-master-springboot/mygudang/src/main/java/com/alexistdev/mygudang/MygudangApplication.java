@@ -41,17 +41,6 @@ public class MygudangApplication {
     }
 
     @Bean
-    CommandLineRunner seedUser() {
-        return args -> {
-            User user = new User();
-            user.setName("Alex");
-            user.setPassword("1234");
-            user.setEmail("alexistdev@gmail.com");
-            userService.save(user);
-        };
-    }
-
-    @Bean
     CommandLineRunner seedRole() {
         return args -> {
             Role role1 = new Role();
@@ -74,6 +63,19 @@ public class MygudangApplication {
             roleService.save(role4);
         };
     }
+
+//    @Bean
+//    CommandLineRunner seedUser() {
+//        return args -> {
+//            Role role = roleService.getById("1");
+//            User user = new User();
+//            user.setName("Alex");
+//            user.setPassword("1234");
+//            user.setEmail("alexistdev@gmail.com");
+//            user.setRole(role);
+//            userService.save(user);
+//        };
+//    }
 
 //    @Bean
 //    CommandLineRunner seedPermission() {

@@ -36,7 +36,7 @@ public class AuthController {
                 responseData.setStatus(true);
                 message.add("Data berhasil didapatkan");
                 responseData.setMessages(message);
-                responseData.setPayload(whoIam);
+                responseData.setData(whoIam);
                 return ResponseEntity.ok(responseData);
             }
         }
