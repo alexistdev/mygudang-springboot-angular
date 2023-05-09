@@ -50,3 +50,52 @@ pilih body -> raw ->json
 </table>
 
 ## Installasi Android:
+
+## EndPoint RESTAPI
+<table>
+<thead>
+    <tr>
+<th>No</th>
+<th>EndPoint</th>
+        <th>Deskripsi</th>
+<th>Method</th>
+<th>Payload</th>
+</tr>
+    </thead>
+    <tbody>
+<tr>
+<td>1</td>
+<td>Tambah Permission</td>
+<td>http://localhost:8082/api/permission</td>
+<td>
+         POST
+</td>
+<td>
+    {
+    "slug" : "/wakanda",
+    "role" : {
+        "id" : 1,
+        "name": "Admin",
+        "level": 1
+    }
+}
+</td>
+</tr>
+        
+<tr>
+<td>2</td>
+<td>Tambah User</td>
+<td>http://localhost:8082/api/users</td>
+    <td>POST</td>   
+   <td>
+    {
+    "name": "alex",
+    "email": "alexistdev@gmail.com",
+    "phone": "082371408678",
+    "password": "12345",
+    "isActive": 1
+}
+    </td>           
+</tr>
+    </tbody>
+</table>
