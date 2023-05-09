@@ -42,7 +42,8 @@ public class User extends AuditEntity implements Serializable {
     @Column(name="isActive")
     private int isActive;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
 
     public User() {

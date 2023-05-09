@@ -1,7 +1,9 @@
 package com.alexistdev.mygudang.service.impl;
 
+import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.entity.User;
 import com.alexistdev.mygudang.repository.UserRepository;
+import com.alexistdev.mygudang.service.RoleService;
 import com.alexistdev.mygudang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,12 +20,15 @@ public class UserServiceImplement implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
+    @Autowired
+    RoleService roleService;
 
     @Override
     public User save(User users) throws Exception {
         User insertUser = new User();
         Date now = new Date();
+        Role role = roleService.getById(String.valueOf(users.getRole().getId()));
+        insertUser.setRole(role);
         insertUser.setName(users.getName());
         insertUser.setEmail(users.getEmail());
         insertUser.setPassword(passwordEncoder.encode(users.getPassword()));
