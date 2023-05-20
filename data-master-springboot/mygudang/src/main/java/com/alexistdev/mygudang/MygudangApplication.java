@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,24 +49,13 @@ public class MygudangApplication {
     @Bean
     CommandLineRunner seedRole() {
         return args -> {
-            Role role1 = new Role();
-            role1.setName("Superadmin");
-            role1.setLevel(1);
-            roleService.save(role1);
-            Role role2 = new Role();
-            role2.setName("Admin");
-            role2.setLevel(2);
-            roleService.save(role2);
-
-            Role role3 = new Role();
-            role3.setName("Admin Gudang");
-            role3.setLevel(3);
-            roleService.save(role3);
-
-            Role role4 = new Role();
-            role4.setName("Admin PO");
-            role4.setLevel(4);
-            roleService.save(role4);
+            List<String> names = new ArrayList<>(Arrays.asList("Superadmin", "Admin", "Admin Gudang", "Admin PO"));
+            for (int i=0; i < names.size(); i++) {
+                Role role = new Role();
+                role.setName(names.get(i));
+                role.setLevel(i+1);
+                roleService.save(role);
+            }
         };
     }
 
