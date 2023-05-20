@@ -29,9 +29,9 @@ public class PermissionServiceImplement implements PermissionService {
     public Permission save(Permission permission) throws Exception
     {
         Date now = new Date();
-        Role role = roleService.getById(String.valueOf(permission.getRole().getId()));
+//        Role role = roleService.getById(String.valueOf(permission.getRole().getId()));
         Permission insertPermission = new Permission();
-        insertPermission.setRole(role);
+        insertPermission.setRole(permission.getRole());
         insertPermission.setSlug(permission.getSlug());
         insertPermission.setUpdatedAt(now);
         insertPermission.setCreatedAt(now);

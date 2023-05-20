@@ -27,8 +27,7 @@ public class UserServiceImplement implements UserService {
     public User save(User users) throws Exception {
         User insertUser = new User();
         Date now = new Date();
-        Role role = roleService.getById(String.valueOf(users.getRole().getId()));
-        insertUser.setRole(role);
+        insertUser.setRole(users.getRole());
         insertUser.setName(users.getName());
         insertUser.setEmail(users.getEmail());
         insertUser.setPassword(passwordEncoder.encode(users.getPassword()));

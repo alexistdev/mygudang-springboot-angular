@@ -15,6 +15,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
+import java.util.Optional;
+
 @SpringBootApplication
 public class MygudangApplication {
 
@@ -68,14 +71,14 @@ public class MygudangApplication {
     @Bean
     CommandLineRunner seedUser() {
         return args -> {
-            Role role = roleService.getById("1");
+            List<Role> roles = roleService.getAll();
             User user = new User();
             user.setName("Alex");
             user.setPassword("1234");
             user.setIsActive(1);
             user.setPhone("082371408678");
             user.setEmail("alexistdev@gmail.com");
-            user.setRole(role);
+            user.setRole(roles.get(1));
             userService.save(user);
         };
     }
@@ -83,9 +86,9 @@ public class MygudangApplication {
     @Bean
     CommandLineRunner seedPermission() {
         return args -> {
+            List<Role> roles = roleService.getAll();
             Permission permission1 = new Permission();
-            Role role = roleService.getById("1");
-            permission1.setRole(role);
+            permission1.setRole(roles.get(0));
             permission1.setSlug("/dashboard");
             permissionService.save(permission1);
         };

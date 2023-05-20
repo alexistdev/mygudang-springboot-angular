@@ -6,7 +6,10 @@ import com.alexistdev.mygudang.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 @Repository
 public class RoleServiceImplement implements RoleService {
 
@@ -28,5 +31,13 @@ public class RoleServiceImplement implements RoleService {
     @Override
     public Role getById(String id) throws Exception {
         return roleRepository.findById(Long.parseLong(id)).orElse(null);
+    }
+
+    @Override
+    public List<Role> getAll() throws Exception {
+        List<Role> roleList = new ArrayList<>();
+        Iterable<Role> iterable = roleRepository.findAll();
+        iterable.forEach(roleList::add);
+        return roleList;
     }
 }

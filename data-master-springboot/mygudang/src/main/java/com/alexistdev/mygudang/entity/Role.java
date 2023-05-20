@@ -3,6 +3,7 @@ package com.alexistdev.mygudang.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.aspectj.lang.annotation.After;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
@@ -19,8 +20,10 @@ public class Role extends AuditEntity {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name="uuid2", strategy = "uuid2")
+    @Column(name = "id", columnDefinition = "VARCHAR(50)")
+    private String id;
 
     @Column(name="name")
     private String name;
