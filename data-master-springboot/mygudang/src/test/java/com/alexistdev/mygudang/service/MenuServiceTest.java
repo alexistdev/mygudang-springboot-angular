@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -33,10 +34,9 @@ public class MenuServiceTest {
     }
 
     @Test
-    public void insertMenuFailTest(){
-//        MenuDTO insertMenu = new MenuDTO();
-//        insertMenu.setMenuCode("dashboard");
-//        menuService.save(insertMenu);
-//        Assertions.assertThrows(SQLException.class);
+    public void insertMenuFailDataNullTest(){
+        MenuDTO insertMenu = new MenuDTO();
+        insertMenu.setMenuCode("dashboard");
+        Assertions.assertThrows(DataIntegrityViolationException.class, ()-> menuService.save(insertMenu));
     }
 }
