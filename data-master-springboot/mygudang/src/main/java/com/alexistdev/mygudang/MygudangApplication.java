@@ -1,8 +1,10 @@
 package com.alexistdev.mygudang;
 
+import com.alexistdev.mygudang.dto.MenuDTO;
 import com.alexistdev.mygudang.entity.Permission;
 import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.entity.User;
+import com.alexistdev.mygudang.service.MenuService;
 import com.alexistdev.mygudang.service.PermissionService;
 import com.alexistdev.mygudang.service.RoleService;
 import com.alexistdev.mygudang.service.UserService;
@@ -33,6 +35,9 @@ public class MygudangApplication {
     @Autowired
     PermissionService permissionService;
 
+    @Autowired
+    MenuService menuService;
+
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
@@ -59,6 +64,20 @@ public class MygudangApplication {
                 role.setModifiedBy("System");
                 roleService.save(role);
             }
+        };
+    }
+
+    @Bean
+    CommandLineRunner seedMenu() {
+        return args -> {
+            MenuDTO insertMenu = new MenuDTO();
+            insertMenu.setMenuCode("dashboard");
+            insertMenu.setUrl("/dashboard");
+            insertMenu.setLabel("fa-dashboard");
+            insertMenu.setDescription("Halaman dashboard");
+            insertMenu.setCreatedBy("System");
+            insertMenu.setModifiedBy("System");
+            menuService.save(insertMenu);
         };
     }
 
