@@ -15,10 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @SpringBootApplication
 public class MygudangApplication {
@@ -49,11 +46,17 @@ public class MygudangApplication {
     @Bean
     CommandLineRunner seedRole() {
         return args -> {
-            List<String> names = new ArrayList<>(Arrays.asList("Superadmin", "Admin", "Admin Gudang", "Admin PO"));
-            for (int i=0; i < names.size(); i++) {
+            HashMap<String,String> names = new HashMap<>();
+            names.put("Superadmin","Super Admin");
+            names.put("Admin","Administrator");
+            names.put("Admin Gudang","Admin Gudang Input Stock");
+            names.put("Admin PO","Admin untuk membuat PO");
+            for (Map.Entry<String, String> set : names.entrySet()) {
                 Role role = new Role();
-                role.setName(names.get(i));
-                role.setLevel(i+1);
+                role.setName(set.getKey());
+                role.setDescription(set.getValue());
+                role.setCreatedBy("System");
+                role.setModifiedBy("System");
                 roleService.save(role);
             }
         };

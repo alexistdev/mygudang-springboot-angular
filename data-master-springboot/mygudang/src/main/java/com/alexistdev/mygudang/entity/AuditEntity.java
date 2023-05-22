@@ -26,6 +26,12 @@ public class AuditEntity {
     @Column(name="updated_at")
     private Date updatedAt;
 
+    @Column(name="created_by")
+    private String createdBy;
+
+    @Column(name="modified_by")
+    private String modifiedBy;
+
     public AuditEntity() {
     }
 }

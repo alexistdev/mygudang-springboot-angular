@@ -22,7 +22,9 @@ public class RoleServiceImplement implements RoleService {
         Date now = new Date();
         Role insertRole = new Role();
         insertRole.setName(role.getName());
-        insertRole.setLevel(role.getLevel());
+        insertRole.setDescription(role.getDescription());
+        insertRole.setCreatedBy(role.getCreatedBy());
+        insertRole.setModifiedBy(role.getModifiedBy());
         insertRole.setCreatedAt(now);
         insertRole.setUpdatedAt(now);
         return roleRepository.save(insertRole);

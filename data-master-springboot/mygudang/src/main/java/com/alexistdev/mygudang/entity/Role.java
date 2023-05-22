@@ -25,10 +25,12 @@ public class Role extends AuditEntity {
     @Column(name = "id", columnDefinition = "VARCHAR(50)")
     private String id;
 
-    @Column(name="name")
+    @Column(name="name", nullable = false)
     private String name;
 
-    @Column(name="level")
-    private int level;
+    @Column(name="description", nullable = false)
+    private String description;
+
+
 
 }
