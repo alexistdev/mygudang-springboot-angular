@@ -1,13 +1,12 @@
 package com.alexistdev.mygudang;
 
 import com.alexistdev.mygudang.dto.MenuDTO;
+import com.alexistdev.mygudang.dto.RoleMenuDTO;
+import com.alexistdev.mygudang.entity.Menu;
 import com.alexistdev.mygudang.entity.Permission;
 import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.entity.User;
-import com.alexistdev.mygudang.service.MenuService;
-import com.alexistdev.mygudang.service.PermissionService;
-import com.alexistdev.mygudang.service.RoleService;
-import com.alexistdev.mygudang.service.UserService;
+import com.alexistdev.mygudang.service.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,16 +26,19 @@ public class MygudangApplication {
     }
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    RoleService roleService;
+    private RoleService roleService;
 
     @Autowired
-    PermissionService permissionService;
+    private PermissionService permissionService;
 
     @Autowired
-    MenuService menuService;
+    private MenuService menuService;
+
+    @Autowired
+    private RoleMenuService roleMenuService;
 
     @Bean
     public ModelMapper modelMapper() {
@@ -93,6 +95,20 @@ public class MygudangApplication {
             user.setEmail("alexistdev@gmail.com");
             user.setRole(roles.get(1));
             userService.save(user);
+        };
+    }
+
+    @Bean
+    CommandLineRunner seedRoleMenu() {
+        return args -> {
+            List<Role> roles = roleService.getAll();
+            List<Menu> menus = menuService.getAll();
+            RoleMenuDTO roleMenuDTO = new RoleMenuDTO();
+            roleMenuDTO.setRole(roles.get(0));
+            roleMenuDTO.setMenu(menus.get(0));
+            roleMenuDTO.setCreatedBy("System");
+            roleMenuDTO.setModifiedBy("System");
+            roleMenuService.save(roleMenuDTO);
         };
     }
 

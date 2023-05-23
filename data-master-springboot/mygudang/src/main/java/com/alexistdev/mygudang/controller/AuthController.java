@@ -5,11 +5,8 @@ import com.alexistdev.mygudang.dto.ResponseData;
 import com.alexistdev.mygudang.dto.UserDTO;
 import com.alexistdev.mygudang.entity.User;
 import com.alexistdev.mygudang.service.UserService;
-import com.alexistdev.mygudang.service.UserServiceold;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
