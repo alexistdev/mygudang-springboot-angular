@@ -66,6 +66,9 @@ public class AuthController {
     private List<Menu> getDataMenuList(String id) throws Exception{
         List<Menu> menuList = new ArrayList<>();
         List<UserRole> userRoleList = userRoleService.getByUserId(id);
+        if(userRoleList.isEmpty()){
+            return menuList;
+        }
         List<RoleMenu> roleMenuList = roleMenuService.getByRoleId(userRoleList.get(0).getRole().getId());
         roleMenuList.forEach((result)-> menuList.add(result.getMenu()));
         return menuList;
