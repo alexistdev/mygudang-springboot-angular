@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public class RoleMenuServiceImplement implements RoleMenuService {
@@ -26,5 +27,10 @@ public class RoleMenuServiceImplement implements RoleMenuService {
         insertRoleMenu.setCreatedBy(roleMenuDTO.getCreatedBy());
         insertRoleMenu.setModifiedBy(roleMenuDTO.getModifiedBy());
         return roleMenuRepository.save(insertRoleMenu);
+    }
+
+    @Override
+    public List<RoleMenu> getByRoleId(String roleId) throws Exception {
+        return roleMenuRepository.findByRoleId(roleId);
     }
 }
