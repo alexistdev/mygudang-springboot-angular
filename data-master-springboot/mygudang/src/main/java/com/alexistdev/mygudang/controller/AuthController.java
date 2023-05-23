@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +19,8 @@ import java.util.List;
 @RequestMapping("/api/auth")
 public class AuthController {
     public static final String LOGIN = "/login";
-    public static final String TEST = "/test";
 
+    @Autowired
     private UserService userservice;
 
     @Autowired
@@ -72,13 +71,5 @@ public class AuthController {
         List<RoleMenu> roleMenuList = roleMenuService.getByRoleId(userRoleList.get(0).getRole().getId());
         roleMenuList.forEach((result)-> menuList.add(result.getMenu()));
         return menuList;
-    }
-
-
-    @GetMapping(value = TEST)
-    public ResponseEntity<ResponseData<User>> doTesting() {
-        ResponseData<User> responseData = new ResponseData<>();
-        responseData.setStatus(true);
-        return ResponseEntity.ok(responseData);
     }
 }
