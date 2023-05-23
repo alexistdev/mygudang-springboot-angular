@@ -2,6 +2,7 @@ package com.alexistdev.mygudang.controller;
 
 import com.alexistdev.mygudang.dto.LoginDTO;
 import com.alexistdev.mygudang.dto.ResponseData;
+import com.alexistdev.mygudang.dto.UserDTO;
 import com.alexistdev.mygudang.entity.User;
 import com.alexistdev.mygudang.service.UserService;
 import com.alexistdev.mygudang.service.UserServiceold;
@@ -27,16 +28,23 @@ public class AuthController {
     }
 
     @PostMapping(value = LOGIN)
-    public ResponseEntity<ResponseData<User>> doLogin(@RequestBody LoginDTO user) throws Exception {
+    public ResponseEntity<ResponseData<UserDTO>> doLogin(@RequestBody LoginDTO user) throws Exception {
         List<String> message = new ArrayList<>();
-        ResponseData<User> responseData = new ResponseData<>();
+        ResponseData<UserDTO> responseData = new ResponseData<>();
         User whoIam = userservice.findByEmail(user.getUn());
         if(whoIam != null){
             if(userservice.authenticateLogin(user.getPw(),whoIam.getPassword())){
+                UserDTO userDTO = new UserDTO();
+                userDTO.setId(whoIam.getId());
+                userDTO.setName(whoIam.getName());
+                userDTO.setEmail(whoIam.getEmail());
+                userDTO.setPhone(whoIam.getPhone());
+                userDTO.setIsActive(whoIam.getIsActive());
+                userDTO.setRole(whoIam.getRole());
                 responseData.setStatus(true);
                 message.add("Data berhasil didapatkan");
                 responseData.setMessages(message);
-                responseData.setData(whoIam);
+                responseData.setData(userDTO);
                 return ResponseEntity.ok(responseData);
             }
         }
