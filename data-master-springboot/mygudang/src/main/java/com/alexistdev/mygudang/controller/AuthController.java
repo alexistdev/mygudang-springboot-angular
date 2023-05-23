@@ -41,19 +41,14 @@ public class AuthController {
         User whoIam = userservice.findByEmail(user.getUn());
         if(whoIam != null){
             if(userservice.authenticateLogin(user.getPw(),whoIam.getPassword())){
-                List<Menu> menuList = new ArrayList<>();
-                List<UserRole> userRoleList = userRoleService.getByUserId(whoIam.getId());
-                String roleId = userRoleList.get(0).getRole().getId();
-                List<RoleMenu> roleMenuList = roleMenuService.getByRoleId(roleId);
-                roleMenuList.forEach((result)-> menuList.add(result.getMenu()));
                 LoginResDTO loginResDTO = new LoginResDTO();
                 loginResDTO.setId(whoIam.getId());
                 loginResDTO.setName(whoIam.getName());
                 loginResDTO.setEmail(whoIam.getEmail());
                 loginResDTO.setPhone(whoIam.getPhone());
                 loginResDTO.setIsActive(whoIam.getIsActive());
-                loginResDTO.setMenuList(menuList);
-                loginResDTO.setRoleId(roleId);
+                loginResDTO.setMenuList(getDataMenuList(whoIam.getId()));
+                loginResDTO.setRoleId(whoIam.getId());
                 responseData.setStatus(true);
                 message.add("Data berhasil didapatkan");
                 responseData.setMessages(message);
@@ -66,6 +61,14 @@ public class AuthController {
         responseData.setMessages(message);
         responseData.setPayload(null);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+    }
+
+    private List<Menu> getDataMenuList(String id) throws Exception{
+        List<Menu> menuList = new ArrayList<>();
+        List<UserRole> userRoleList = userRoleService.getByUserId(id);
+        List<RoleMenu> roleMenuList = roleMenuService.getByRoleId(userRoleList.get(0).getRole().getId());
+        roleMenuList.forEach((result)-> menuList.add(result.getMenu()));
+        return menuList;
     }
 
 
