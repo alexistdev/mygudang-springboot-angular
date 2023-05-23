@@ -2,6 +2,7 @@ package com.alexistdev.mygudang;
 
 import com.alexistdev.mygudang.dto.MenuDTO;
 import com.alexistdev.mygudang.dto.RoleMenuDTO;
+import com.alexistdev.mygudang.dto.UserRoleDTO;
 import com.alexistdev.mygudang.entity.Menu;
 import com.alexistdev.mygudang.entity.Permission;
 import com.alexistdev.mygudang.entity.Role;
@@ -39,6 +40,9 @@ public class MygudangApplication {
 
     @Autowired
     private RoleMenuService roleMenuService;
+
+    @Autowired
+    private UserRoleService userRoleService;
 
     @Bean
     public ModelMapper modelMapper() {
@@ -86,14 +90,12 @@ public class MygudangApplication {
     @Bean
     CommandLineRunner seedUser() {
         return args -> {
-            List<Role> roles = roleService.getAll();
             User user = new User();
             user.setName("Alex");
             user.setPassword("1234");
             user.setIsActive(1);
             user.setPhone("082371408678");
             user.setEmail("alexistdev@gmail.com");
-            user.setRole(roles.get(1));
             userService.save(user);
         };
     }
@@ -109,6 +111,20 @@ public class MygudangApplication {
             roleMenuDTO.setCreatedBy("System");
             roleMenuDTO.setModifiedBy("System");
             roleMenuService.save(roleMenuDTO);
+        };
+    }
+
+    @Bean
+    CommandLineRunner seedUserRole() {
+        return args -> {
+            List<Role> roles = roleService.getAll();
+            List<User> users = userService.getAll();
+            UserRoleDTO userRoleDTO = new UserRoleDTO();
+            Role testing = new Role();
+            testing.setName(roles.get(0).getName());
+            userRoleDTO.setUser(users.get(0));
+            userRoleDTO.setRole(roles.get(0));
+            userRoleService.save(userRoleDTO);
         };
     }
 

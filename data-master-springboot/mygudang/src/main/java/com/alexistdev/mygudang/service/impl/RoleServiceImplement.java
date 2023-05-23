@@ -32,7 +32,7 @@ public class RoleServiceImplement implements RoleService {
 
     @Override
     public Role getById(String id) throws Exception {
-        return roleRepository.findById(Long.parseLong(id)).orElse(null);
+        return roleRepository.findById(id).orElse(null);
     }
 
     @Override

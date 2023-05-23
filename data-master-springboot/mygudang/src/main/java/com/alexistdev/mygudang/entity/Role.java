@@ -33,13 +33,4 @@ public class Role extends AuditEntity {
     @Column(name="description", nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "role",cascade = CascadeType.ALL)
-    @JsonIgnore
-    List<UserRole> userRoleList;
-
-    @OneToMany(mappedBy = "role" , cascade = CascadeType.ALL)
-    List<RoleMenu> roleMenuList;
-
-
-
 }

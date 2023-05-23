@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
 
@@ -20,10 +21,11 @@ import static jakarta.persistence.TemporalType.TIMESTAMP;
 @Table(name = "users")
 public class User extends AuditEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name="uuid2", strategy = "uuid2")
+    @Column(name = "id", columnDefinition = "VARCHAR(50)")
+    private String id;
 
     @NotEmpty(message = "Name is required")
     @Column(name = "name")
@@ -42,16 +44,5 @@ public class User extends AuditEntity implements Serializable {
 
     @Column(name = "isActive")
     private int isActive;
-
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
-    private Role role;
-
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
-    @JsonManagedReference(value = "userrole-user")
-    UserRole userRole;
-
-    public User() {
-    }
 
 }

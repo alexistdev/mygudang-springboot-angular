@@ -37,7 +37,7 @@ public class AuthController {
                 userDTO.setEmail(whoIam.getEmail());
                 userDTO.setPhone(whoIam.getPhone());
                 userDTO.setIsActive(whoIam.getIsActive());
-                userDTO.setRole(whoIam.getRole());
+//                userDTO.setRole(whoIam.getRole());
                 responseData.setStatus(true);
                 message.add("Data berhasil didapatkan");
                 responseData.setMessages(message);
