@@ -1,5 +1,6 @@
 package com.alexistdev.mygudang.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.aspectj.lang.annotation.After;
@@ -8,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import static jakarta.persistence.TemporalType.TIMESTAMP;
 
@@ -30,6 +32,13 @@ public class Role extends AuditEntity {
 
     @Column(name="description", nullable = false)
     private String description;
+
+    @OneToMany(mappedBy = "role",cascade = CascadeType.ALL)
+    @JsonIgnore
+    List<UserRole> userRoleList;
+
+    @OneToMany(mappedBy = "role" , cascade = CascadeType.ALL)
+    List<RoleMenu> roleMenuList;
 
 
 
