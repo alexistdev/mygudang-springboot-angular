@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,27 +34,35 @@ public class UserRoleController {
 
     @PostMapping
     public ResponseEntity<ResponseData> create(@Valid @RequestBody UserRoleDAO DAO) throws Exception{
-        ResponseData<User> responseData = new ResponseData<>();
+        ResponseData<UserRole> responseData = new ResponseData<>();
         List<String> message = new ArrayList<>();
-        message.add("Data berhasil didapatkan");
-        responseData.setStatus(true);
 
-//        Role role = roleService.getById(DAO.getRoleId());
+        responseData.setStatus(false);
+        Role role = roleService.getById(DAO.getRoleId());
         User user = userService.getById(DAO.getUserId());
-        responseData.setPayload(user);
-//        if(role == null){
-//            return new ResponseEntity<ResponseData>(responseData, HttpStatus.BAD_REQUEST);
-//        }
-//        UserRoleDTO userRoleDTO = new UserRoleDTO();
-//        userRoleDTO.setRole(role);
-//        userRoleDTO.setUser(user);
-//        userRoleDTO.setCreatedBy("System");
-//        userRoleDTO.setModifiedBy("System");
-//        UserRole data = userRoleService.save(userRoleDTO);
-//        if(data != null){
-//            responseData.setPayload(data);
-//            responseData.setMessages(message);
-//        }
-        return new ResponseEntity<ResponseData>(responseData, HttpStatus.CREATED);
+
+        if(role != null && user != null){
+            List<UserRole> cekList = userRoleService.getByUserId(DAO.getUserId());
+            if(cekList.isEmpty()){
+                UserRoleDTO userRoleDTO = new UserRoleDTO();
+                userRoleDTO.setRole(role);
+                userRoleDTO.setUser(user);
+                userRoleDTO.setCreatedBy("System");
+                userRoleDTO.setModifiedBy("System");
+                UserRole data = userRoleService.save(userRoleDTO);
+                if(data != null){
+                    responseData.setPayload(data);
+                    responseData.setStatus(true);
+                    responseData.setMessages(message);
+                }
+                return new ResponseEntity<ResponseData>(responseData, HttpStatus.OK);
+            }
+            message.add("User Ini Sudah memiliki Role");
+            responseData.setMessages(message);
+            return new ResponseEntity<ResponseData>(responseData, HttpStatus.FORBIDDEN);
+        }
+        message.add("Bad Request");
+        responseData.setMessages(message);
+        return new ResponseEntity<ResponseData>(responseData, HttpStatus.BAD_REQUEST);
     }
 }
