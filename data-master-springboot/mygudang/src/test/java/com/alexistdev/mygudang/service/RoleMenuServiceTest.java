@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.Date;
 
@@ -24,7 +25,7 @@ public class RoleMenuServiceTest {
     private MenuService menuService;
 
     @Test
-    public void insertRoleMenuSuccessTest() throws Exception{
+    public void insertRoleMenuSuccessTest() throws Exception {
         Role insertRole = new Role();
         insertRole.setName("Administrator");
         insertRole.setDescription("Halaman Administrator");
@@ -48,5 +49,22 @@ public class RoleMenuServiceTest {
         roleMenuDTO.setModifiedBy("Testing");
         Assertions.assertNotNull(roleMenuService.save(roleMenuDTO));
 
+    }
+
+    @Test
+    public void insertMenuFailRoleEmpty() {
+
+            Menu insertMenu = new Menu();
+            insertMenu.setMenuCode("dashboard");
+            insertMenu.setDescription("halaman dashboard");
+            insertMenu.setUrl("/dashboard");
+            insertMenu.setLabel("dashboard");
+            insertMenu.setCreatedBy("Testing");
+            insertMenu.setModifiedBy("Testing");
+
+            RoleMenuDTO roleMenuDTO = new RoleMenuDTO();
+            roleMenuDTO.setCreatedBy("Testing");
+            roleMenuDTO.setModifiedBy("Testing");
+            Assertions.assertThrows(DataIntegrityViolationException.class, () -> roleMenuService.save(roleMenuDTO));
     }
 }

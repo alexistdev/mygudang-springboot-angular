@@ -20,11 +20,11 @@ public class RoleMenu extends AuditEntity {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "role_id",nullable = false)
     private Role role;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "menu_id")
+    @JoinColumn(name = "menu_id",nullable = false)
     private Menu menu;
 
 
