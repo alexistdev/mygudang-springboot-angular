@@ -51,7 +51,7 @@ public class UserRoleController {
                 userRoleDTO.setModifiedBy("System");
                 UserRole data = userRoleService.save(userRoleDTO);
                 if(data != null){
-                    responseData.setPayload(data);
+                    responseData.setData(data);
                     responseData.setStatus(true);
                     responseData.setMessages(message);
                 }

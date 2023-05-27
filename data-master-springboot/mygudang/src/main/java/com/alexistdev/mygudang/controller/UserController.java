@@ -26,7 +26,7 @@ public class UserController {
         responseData.setStatus(true);
 //        responseData.setPayload(userservice.save(user));
         User data = userservice.save(user);
-        responseData.setPayload(data);
+        responseData.setData(data);
         responseData.setMessages(message);
 //        return ResponseEntity.ok(responseData);
         return new ResponseEntity<ResponseData>(responseData, HttpStatus.CREATED);

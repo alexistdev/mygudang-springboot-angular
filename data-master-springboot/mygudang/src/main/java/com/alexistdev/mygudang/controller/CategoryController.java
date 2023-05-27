@@ -32,11 +32,11 @@ public class CategoryController {
                     responseData.getMessages().add(error.getDefaultMessage());
                 }
                 responseData.setStatus(false);
-                responseData.setPayload(null);
+                responseData.setData(null);
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
             }
             responseData.setStatus(true);
-            responseData.setPayload(categoryService.save(category));
+            responseData.setData(categoryService.save(category));
             return ResponseEntity.ok(responseData);
         }catch (Exception e){
             e.printStackTrace();

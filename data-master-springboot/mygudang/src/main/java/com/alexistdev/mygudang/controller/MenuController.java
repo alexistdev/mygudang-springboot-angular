@@ -24,7 +24,7 @@ public class MenuController {
         ResponseData<Menu> responseData = new ResponseData<>();
         responseData.setStatus(true);
         Menu result = menuService.save(menu);
-        responseData.setPayload(result);
+        responseData.setData(result);
         return ResponseEntity.ok(responseData);
     }
 

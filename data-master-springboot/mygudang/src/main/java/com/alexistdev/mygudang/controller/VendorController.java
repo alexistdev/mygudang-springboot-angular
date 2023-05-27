@@ -33,7 +33,7 @@ public class VendorController {
                 responseData.getMessages().add(error.getDefaultMessage());
             }
             responseData.setStatus(false);
-            responseData.setPayload(null);
+            responseData.setData(null);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
         }
         //cara manual convert to DTO
@@ -44,7 +44,7 @@ public class VendorController {
 //        vendor.setCode(vendorDTO.getCode());
         Vendor vendor = modelMapper.map(vendorDTO,Vendor.class);
         responseData.setStatus(true);
-        responseData.setPayload(vendorService.save(vendor));
+        responseData.setData(vendorService.save(vendor));
         return ResponseEntity.ok(responseData);
     }
 
@@ -56,12 +56,12 @@ public class VendorController {
                 responseData.getMessages().add(error.getDefaultMessage());
             }
             responseData.setStatus(false);
-            responseData.setPayload(null);
+            responseData.setData(null);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
         }
         Vendor vendor = modelMapper.map(vendorDTO,Vendor.class);
         responseData.setStatus(true);
-        responseData.setPayload(vendorService.save(vendor));
+        responseData.setData(vendorService.save(vendor));
         return ResponseEntity.ok(responseData);
     }
 
