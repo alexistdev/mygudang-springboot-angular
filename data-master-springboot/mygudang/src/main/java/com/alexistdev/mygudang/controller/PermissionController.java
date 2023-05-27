@@ -29,7 +29,7 @@ public class PermissionController {
         ResponseData<Permission> responseData = new ResponseData<>();
         responseData.setStatus(true);
         Permission permissionDTO = permissionService.save(permission);
-        responseData.setPayload(permissionDTO);
+        responseData.setData(permissionDTO);
         return ResponseEntity.ok(responseData);
     }
 }
