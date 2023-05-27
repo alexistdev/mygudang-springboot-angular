@@ -51,14 +51,14 @@ public class AuthController {
                 responseData.setStatus(true);
                 message.add("Data berhasil didapatkan");
                 responseData.setMessages(message);
-                responseData.setPayload(loginResDTO);
+                responseData.setData(loginResDTO);
                 return ResponseEntity.ok(responseData);
             }
         }
         message.add("Gagal");
         responseData.setStatus(false);
         responseData.setMessages(message);
-        responseData.setPayload(null);
+        responseData.setData(null);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
     }
 
