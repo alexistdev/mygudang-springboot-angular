@@ -1,5 +1,6 @@
 package com.alexistdev.mygudang.dto;
 
+import com.alexistdev.mygudang.dao.MenuDAO;
 import com.alexistdev.mygudang.entity.Menu;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,5 +16,5 @@ public class LoginResDTO {
     private String phone;
     private String roleId;
     private int isActive;
-    private List<Menu> menuList;
+    private List<MenuDAO> menuList;
 }

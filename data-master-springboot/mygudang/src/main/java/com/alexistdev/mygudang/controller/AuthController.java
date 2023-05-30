@@ -1,5 +1,6 @@
 package com.alexistdev.mygudang.controller;
 
+import com.alexistdev.mygudang.dao.MenuDAO;
 import com.alexistdev.mygudang.dto.*;
 import com.alexistdev.mygudang.entity.Menu;
 import com.alexistdev.mygudang.entity.RoleMenu;
@@ -8,6 +9,8 @@ import com.alexistdev.mygudang.entity.UserRole;
 import com.alexistdev.mygudang.service.RoleMenuService;
 import com.alexistdev.mygudang.service.UserRoleService;
 import com.alexistdev.mygudang.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,14 +65,19 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
     }
 
-    private List<Menu> getDataMenuList(String id) throws Exception{
-        List<Menu> menuList = new ArrayList<>();
+    private List<MenuDAO> getDataMenuList(String id) throws Exception{
+        List<MenuDAO> menuList = new ArrayList<>();
         List<UserRole> userRoleList = userRoleService.getByUserId(id);
         if(userRoleList.isEmpty()){
             return menuList;
         }
         List<RoleMenu> roleMenuList = roleMenuService.getByRoleId(userRoleList.get(0).getRole().getId());
-        roleMenuList.forEach((result)-> menuList.add(result.getMenu()));
+        roleMenuList.forEach((result)-> menuList.add(convertDAO(result.getMenu())));
         return menuList;
+    }
+
+    private MenuDAO convertDAO(Menu menu){
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(menu, MenuDAO.class);
     }
 }

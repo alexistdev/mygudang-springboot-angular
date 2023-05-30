@@ -1,5 +1,6 @@
 package com.alexistdev.mygudang.entity;
 
+import com.alexistdev.mygudang.dao.MenuDAO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -26,6 +27,5 @@ public class RoleMenu extends AuditEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "menu_id",nullable = false)
     private Menu menu;
-
 
 }

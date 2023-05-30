@@ -84,6 +84,15 @@ public class MygudangApplication {
             insertMenu.setCreatedBy("System");
             insertMenu.setModifiedBy("System");
             menuService.save(insertMenu);
+
+            MenuDTO insertMenu2 = new MenuDTO();
+            insertMenu2.setMenuCode("Input");
+            insertMenu2.setUrl("/input");
+            insertMenu2.setLabel("fa-book");
+            insertMenu2.setDescription("Halaman Menu");
+            insertMenu2.setCreatedBy("System");
+            insertMenu2.setModifiedBy("System");
+            menuService.save(insertMenu2);
         };
     }
 
@@ -111,6 +120,13 @@ public class MygudangApplication {
             roleMenuDTO.setCreatedBy("System");
             roleMenuDTO.setModifiedBy("System");
             roleMenuService.save(roleMenuDTO);
+
+            RoleMenuDTO roleMenuDTO2 = new RoleMenuDTO();
+            roleMenuDTO2.setRole(roles.get(0));
+            roleMenuDTO2.setMenu(menus.get(1));
+            roleMenuDTO2.setCreatedBy("System");
+            roleMenuDTO2.setModifiedBy("System");
+            roleMenuService.save(roleMenuDTO2);
         };
     }
 
