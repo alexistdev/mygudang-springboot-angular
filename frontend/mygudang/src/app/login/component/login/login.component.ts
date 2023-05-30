@@ -51,21 +51,6 @@ export class LoginComponent implements OnInit, AfterViewInit{
             this.doReset();
           },
       });
-
-        // (res) => {
-        //   if(res){
-        //     this.router.navigate(['/dashboard'])
-        //   } else {
-        //     this.error = true;
-        //   }
-        //   this.loginForm.enable();
-        //   this.doReset();
-        // },(err)=>{
-        //   this.error = true;
-        //   this.loginForm.enable();
-        //   this.doReset();
-        // }
-
       this.error = false;
     } else {
       this.doReset();

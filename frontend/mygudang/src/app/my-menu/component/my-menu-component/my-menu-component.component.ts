@@ -23,6 +23,7 @@ export class MyMenuComponentComponent implements OnInit,AfterViewInit{
         .subscribe((menus):void => {
           this.menus = menus;
         });
+    console.log(this.menus);
   }
 
 

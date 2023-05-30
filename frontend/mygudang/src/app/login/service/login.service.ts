@@ -30,7 +30,7 @@ export class LoginService {
               let parsedJson = JSON.parse(stringifiedData);
               let data = parsedJson.data;
               this.menuList = data.menuList[0];
-              this.localStorageService.setItem("menu",JSON.stringify(this.menuList));
+              this.localStorageService.setItem("menu",JSON.stringify(data));
               observer.next(false);
             }
             observer.next(true);

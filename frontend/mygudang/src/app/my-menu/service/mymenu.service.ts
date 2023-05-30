@@ -18,10 +18,9 @@ export class MymenuService{
   }
 
   getUserMenu() {
-    // let myMenu: Menu[] = this.localStorageService.getItem("menu");
     let myObject = JSON.parse(this.localStorageService.getItem("menu"));
+    console.log(myObject);
     let myMenu: MenuItem[] = myObject;
-    // console.log(typeof myMenu);
     return of(myMenu);
   }
 }

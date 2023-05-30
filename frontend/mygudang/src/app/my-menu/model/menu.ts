@@ -3,7 +3,7 @@ import {MenuItem} from "./menu-item";
 export class Menu {
   id: string;
   title: string;
-  menuItem: MenuItem[]
+  menuItem: MenuItem[];
 
 
   constructor(id: string, title: string, menuItem: MenuItem[]) {
