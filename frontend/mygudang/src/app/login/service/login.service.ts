@@ -4,16 +4,15 @@
 * email: alexistdev@gmail.com
 */
 import {LocalStorageService} from "../../config/service/local-storage.service";
-import {Observable, Observer} from "rxjs";
+import {Observable, Observer, map} from "rxjs";
+// import { map } from 'rxjs/operators'
 import {HttpClient} from "@angular/common/http";
-import {Injectable} from "@angular/core";
-
-
-
+import {Injectable, Provider} from "@angular/core";
+import {LoginComponent} from "../component/login/login.component";
 
 @Injectable()
 export class LoginService {
-
+  private  menuList:[] ;
   constructor(
     private http: HttpClient,
     private localStorageService: LocalStorageService
@@ -22,18 +21,23 @@ export class LoginService {
 
   doUserLogin(userName: string, userPwd: string): Observable<boolean>{
     return new Observable((observer: Observer<any>) => {
-      this.http.post('http://localhost:8082/api/auth/login', {'un': userName , 'pw' : userPwd})
-        .subscribe((res)=>{
-          if(res){
-            let myjson = JSON.parse(JSON.stringify(res));
-            console.log(myjson.data.role.id);
-            this.localStorageService.setItem("role",myjson.data.role.id);
+      this.http.post('http://localhost:8084/api/auth/login', {'un': userName , 'pw' : userPwd})
+        .pipe(map((response: Response) => response.json()))
+        .subscribe({
+          next: (res) => {
+            if(!res){
+              let stringifiedData = JSON.stringify(res);
+              let parsedJson = JSON.parse(stringifiedData);
+              let data = parsedJson.data;
+              this.menuList = data.menuList[0];
+              this.localStorageService.setItem("menu",JSON.stringify(this.menuList));
+              observer.next(false);
+            }
             observer.next(true);
-          } else {
+          },
+          error: () => {
             observer.next(false);
-          }
-        },(error) => {
-          observer.next(false);
+          },
         });
     });
   }

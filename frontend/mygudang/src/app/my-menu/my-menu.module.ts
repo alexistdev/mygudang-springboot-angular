@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuItemComponent } from './component/menu-item/menu-item.component';
 import { MyMenuComponentComponent } from './component/my-menu-component/my-menu-component.component';
+import {SharedModule} from "../shared/shared.module";
+import {MymenuService} from "./service/mymenu.service";
 
 
 
@@ -11,10 +13,14 @@ import { MyMenuComponentComponent } from './component/my-menu-component/my-menu-
     MyMenuComponentComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   exports:[
-    MyMenuComponentComponent
+    MyMenuComponentComponent,
+  ],
+  providers:[
+    MymenuService
   ]
 })
 export class MyMenuModule { }
