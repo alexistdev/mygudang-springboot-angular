@@ -33,7 +33,7 @@
         <div class="menu-title">Application</div>
       </a>
       <ul>
-        <li *ngFor="let menu of menus"> <a href="app-emailbox.html"><i class='bx bx-radio-circle'></i>{{menu.title}}</a>
+        <li *ngFor="let menu of menus"> <a href="{{menu.url}}"><i class='bx bx-radio-circle'></i>{{menu.name}}</a>
         </li>
       </ul>
     </li>

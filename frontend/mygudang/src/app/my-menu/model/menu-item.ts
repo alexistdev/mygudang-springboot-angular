@@ -6,12 +6,16 @@
 **/
 
 export class MenuItem {
-  id: string;
   label: string;
+  url: string;
+  description: string;
+  name: string
 
 
-  constructor(id: string, label: string) {
-    this.id = id;
+  constructor(label: string, url: string, description: string, name: string) {
     this.label = label;
+    this.url = url;
+    this.description = description;
+    this.name = name;
   }
 }
