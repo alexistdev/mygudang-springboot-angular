@@ -77,19 +77,19 @@ public class MygudangApplication {
     CommandLineRunner seedMenu() {
         return args -> {
             MenuDTO insertMenu = new MenuDTO();
-            insertMenu.setMenuCode("dashboard");
+            insertMenu.setName("Tashboard");
             insertMenu.setUrl("/dashboard");
-            insertMenu.setLabel("fa-dashboard");
+            insertMenu.setLabel("bx bx-home-alt");
             insertMenu.setDescription("Halaman dashboard");
             insertMenu.setCreatedBy("System");
             insertMenu.setModifiedBy("System");
             menuService.save(insertMenu);
 
             MenuDTO insertMenu2 = new MenuDTO();
-            insertMenu2.setMenuCode("Input");
-            insertMenu2.setUrl("/input");
-            insertMenu2.setLabel("fa-book");
-            insertMenu2.setDescription("Halaman Menu");
+            insertMenu2.setName("Transaksi");
+            insertMenu2.setUrl("/transaction");
+            insertMenu2.setLabel("bx bx-data");
+            insertMenu2.setDescription("Halaman transaksi");
             insertMenu2.setCreatedBy("System");
             insertMenu2.setModifiedBy("System");
             menuService.save(insertMenu2);

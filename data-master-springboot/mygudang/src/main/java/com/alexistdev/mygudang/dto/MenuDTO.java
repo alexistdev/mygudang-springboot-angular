@@ -9,7 +9,7 @@ public class MenuDTO {
     private String label;
     private String url;
     private String description;
-    private String menuCode;
+    private String name;
     private String createdBy;
     private String modifiedBy;
 

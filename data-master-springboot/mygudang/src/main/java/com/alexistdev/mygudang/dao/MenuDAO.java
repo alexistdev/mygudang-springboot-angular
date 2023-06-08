@@ -11,5 +11,5 @@ public class MenuDAO {
     private String label;
     private String url;
     private String description;
-    private String menuCode;
+    private String name;
 }

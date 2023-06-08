@@ -27,7 +27,7 @@ public class MenuControllerTest {
     public void addMenuTest() throws Exception{
         MockMvc mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         MenuDTO insertMenu = new MenuDTO();
-        insertMenu.setMenuCode("dashboard");
+        insertMenu.setName("dashboard");
         insertMenu.setUrl("/dashboard");
         insertMenu.setLabel("fa-dashboard");
         insertMenu.setDescription("Halaman dashboard");

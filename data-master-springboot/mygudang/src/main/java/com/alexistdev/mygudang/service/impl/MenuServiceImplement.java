@@ -22,7 +22,7 @@ public class MenuServiceImplement implements MenuService {
     public Menu save(MenuDTO menu) throws Exception{
         Menu insertMenu = new Menu();
         Date now = new Date();
-        insertMenu.setMenuCode(menu.getMenuCode());
+        insertMenu.setName(menu.getName());
         insertMenu.setDescription(menu.getDescription());
         insertMenu.setUrl(menu.getUrl());
         insertMenu.setLabel(menu.getLabel());

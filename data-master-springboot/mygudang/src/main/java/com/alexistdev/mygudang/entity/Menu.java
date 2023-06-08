@@ -18,8 +18,8 @@ public class Menu extends AuditEntity  {
     @Column(name = "id", columnDefinition = "VARCHAR(50)")
     private String id;
 
-    @Column(name="menu_code", nullable = false)
-    private String menuCode;
+    @Column(name="name", nullable = false)
+    private String name;
 
     @Column(name="label", nullable = false)
     private String label;
