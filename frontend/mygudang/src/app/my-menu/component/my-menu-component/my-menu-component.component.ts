@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
-import {Menu} from "../../model/menu";
 import {MymenuService} from "../../service/mymenu.service";
 import {MenuItem} from "../../model/menu-item";
 
@@ -12,7 +11,7 @@ export class MyMenuComponentComponent implements OnInit,AfterViewInit{
   @Input()
   activeMenu: String = '';
 
-  menus: MenuItem;
+  menus: MenuItem[];
 
 
   constructor(private myMenuService: MymenuService) {
