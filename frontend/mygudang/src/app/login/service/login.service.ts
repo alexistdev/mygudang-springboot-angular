@@ -5,7 +5,6 @@
 */
 import {LocalStorageService} from "../../config/service/local-storage.service";
 import {Observable, Observer, map} from "rxjs";
-// import { map } from 'rxjs/operators'
 import {HttpClient} from "@angular/common/http";
 import {Injectable, Provider} from "@angular/core";
 import {LoginComponent} from "../component/login/login.component";
