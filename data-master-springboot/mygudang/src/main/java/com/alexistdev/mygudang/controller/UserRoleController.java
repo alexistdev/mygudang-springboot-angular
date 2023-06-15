@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,8 +43,8 @@ public class UserRoleController {
         User user = userService.getById(DAO.getUserId());
 
         if(role != null && user != null){
-            List<UserRole> cekList = userRoleService.getByUserId(DAO.getUserId());
-            if(cekList.isEmpty()){
+            UserRole cekList = userRoleService.getByUserId(DAO.getUserId());
+            if(ObjectUtils.isEmpty(cekList)){
                 UserRoleDTO userRoleDTO = new UserRoleDTO();
                 userRoleDTO.setRole(role);
                 userRoleDTO.setUser(user);

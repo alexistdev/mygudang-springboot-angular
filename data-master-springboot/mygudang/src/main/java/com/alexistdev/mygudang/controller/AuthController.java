@@ -9,11 +9,11 @@ import com.alexistdev.mygudang.entity.UserRole;
 import com.alexistdev.mygudang.service.RoleMenuService;
 import com.alexistdev.mygudang.service.UserRoleService;
 import com.alexistdev.mygudang.service.UserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,11 +67,11 @@ public class AuthController {
 
     private List<MenuDAO> getDataMenuList(String id) throws Exception{
         List<MenuDAO> menuList = new ArrayList<>();
-        List<UserRole> userRoleList = userRoleService.getByUserId(id);
-        if(userRoleList.isEmpty()){
+        UserRole userRole = userRoleService.getByUserId(id);
+        if(ObjectUtils.isEmpty(userRole)){
             return menuList;
         }
-        List<RoleMenu> roleMenuList = roleMenuService.getByRoleId(userRoleList.get(0).getRole().getId());
+        List<RoleMenu> roleMenuList = roleMenuService.getByRoleId(userRole.getRole().getId());
         roleMenuList.forEach((result)-> menuList.add(convertDAO(result.getMenu())));
         return menuList;
     }
