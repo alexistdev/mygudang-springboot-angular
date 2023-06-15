@@ -30,5 +30,8 @@ public class Menu extends AuditEntity  {
     @Column(name="description", nullable = false)
     private String description;
 
+    @Column(name="order_no", nullable = false)
+    private int order;
+
 
 }

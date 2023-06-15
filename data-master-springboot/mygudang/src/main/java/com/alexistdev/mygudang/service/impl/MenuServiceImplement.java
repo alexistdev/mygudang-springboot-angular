@@ -26,6 +26,7 @@ public class MenuServiceImplement implements MenuService {
         insertMenu.setDescription(menu.getDescription());
         insertMenu.setUrl(menu.getUrl());
         insertMenu.setLabel(menu.getLabel());
+        insertMenu.setOrder(menu.getOrder());
         insertMenu.setCreatedAt(now);
         insertMenu.setUpdatedAt(now);
         insertMenu.setCreatedBy(menu.getCreatedBy());

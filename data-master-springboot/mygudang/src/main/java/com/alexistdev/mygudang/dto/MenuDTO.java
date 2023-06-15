@@ -10,6 +10,7 @@ public class MenuDTO {
     private String url;
     private String description;
     private String name;
+    private int order;
     private String createdBy;
     private String modifiedBy;
 

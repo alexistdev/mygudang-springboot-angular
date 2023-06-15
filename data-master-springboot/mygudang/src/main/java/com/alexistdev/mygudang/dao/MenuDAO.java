@@ -12,4 +12,5 @@ public class MenuDAO {
     private String url;
     private String description;
     private String name;
+    private int order;
 }
