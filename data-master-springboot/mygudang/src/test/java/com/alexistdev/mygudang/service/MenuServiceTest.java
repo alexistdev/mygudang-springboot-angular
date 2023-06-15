@@ -16,7 +16,7 @@ public class MenuServiceTest {
     @Test
     public void insertMenuSuccessTest()  throws Exception{
         MenuDTO insertMenu = new MenuDTO();
-        insertMenu.setMenuCode("dashboard");
+        insertMenu.setLabel("dashboard");
         insertMenu.setUrl("/dashboard");
         insertMenu.setLabel("fa-dashboard");
         insertMenu.setDescription("Halaman dashboard");
@@ -28,7 +28,7 @@ public class MenuServiceTest {
     @Test
     public void insertMenuFailDataNullTest(){
         MenuDTO insertMenu = new MenuDTO();
-        insertMenu.setMenuCode("dashboard");
+        insertMenu.setLabel("dashboard");
         Assertions.assertThrows(DataIntegrityViolationException.class, ()-> menuService.save(insertMenu));
     }
 }

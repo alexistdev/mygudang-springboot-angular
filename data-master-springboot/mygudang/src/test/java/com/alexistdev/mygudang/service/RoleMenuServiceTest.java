@@ -32,7 +32,7 @@ public class RoleMenuServiceTest {
         Role resultRole = roleService.save(insertRole);
 
         MenuDTO insertMenu = new MenuDTO();
-        insertMenu.setMenuCode("dashboard");
+        insertMenu.setLabel("dashboard");
         insertMenu.setDescription("halaman dashboard");
         insertMenu.setUrl("/dashboard");
         insertMenu.setLabel("dashboard");
@@ -53,7 +53,7 @@ public class RoleMenuServiceTest {
     public void insertMenuFailRoleEmpty() {
 
             Menu insertMenu = new Menu();
-            insertMenu.setMenuCode("dashboard");
+            insertMenu.setLabel("dashboard");
             insertMenu.setDescription("halaman dashboard");
             insertMenu.setUrl("/dashboard");
             insertMenu.setLabel("dashboard");
