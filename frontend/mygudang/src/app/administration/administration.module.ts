@@ -4,13 +4,19 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import {MyMenuModule} from "../my-menu/my-menu.module";
 import { TransaksiComponent } from './component/transaksi/transaksi.component';
 import {AdministrationRoutingModule} from "./administration-routing.module";
+import { WelcomeStaffComponent } from './component/welcome-staff/welcome-staff.component';
+import { HomeStaffComponent } from './component/home-staff/home-staff.component';
+
 
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    TransaksiComponent
+    TransaksiComponent,
+    WelcomeStaffComponent,
+    HomeStaffComponent,
+
   ],
   exports: [
     DashboardComponent
