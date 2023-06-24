@@ -18,6 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @SpringBootApplication
 public class MygudangApplication {
@@ -25,6 +27,8 @@ public class MygudangApplication {
     public static void main(String[] args) {
         SpringApplication.run(MygudangApplication.class, args);
     }
+
+    static Logger logger = Logger.getLogger(MygudangApplication.class.getName());
 
     @Autowired
     private UserService userService;
@@ -77,10 +81,11 @@ public class MygudangApplication {
     CommandLineRunner seedMenu() {
         return args -> {
             MenuDTO insertMenu = new MenuDTO();
-            insertMenu.setName("Tashboard");
+            insertMenu.setName("Dashboard");
             insertMenu.setUrl("/dashboard");
             insertMenu.setLabel("bx bx-home-alt");
             insertMenu.setDescription("Halaman dashboard");
+            insertMenu.setOrder(1);
             insertMenu.setCreatedBy("System");
             insertMenu.setModifiedBy("System");
             menuService.save(insertMenu);
@@ -90,9 +95,22 @@ public class MygudangApplication {
             insertMenu2.setUrl("/transaction");
             insertMenu2.setLabel("bx bx-data");
             insertMenu2.setDescription("Halaman transaksi");
+            insertMenu2.setOrder(2);
             insertMenu2.setCreatedBy("System");
             insertMenu2.setModifiedBy("System");
             menuService.save(insertMenu2);
+
+            MenuDTO insertMenu3 = new MenuDTO();
+            insertMenu3.setName("Data");
+            insertMenu3.setUrl("/data");
+            insertMenu3.setLabel("bx bx-data");
+            insertMenu3.setDescription("Halaman data");
+            insertMenu3.setOrder(3);
+            insertMenu3.setCreatedBy("System");
+            insertMenu3.setModifiedBy("System");
+            menuService.save(insertMenu3);
+
+
         };
     }
 
@@ -140,7 +158,7 @@ public class MygudangApplication {
             testing.setName(roles.get(0).getName());
             userRoleDTO.setUser(users.get(0));
             userRoleDTO.setRole(roles.get(0));
-            userRoleService.save(userRoleDTO);
+//            userRoleService.save(userRoleDTO);
         };
     }
 
@@ -151,6 +169,7 @@ public class MygudangApplication {
             Permission permission1 = new Permission();
             permission1.setRole(roles.get(0));
             permission1.setSlug("/dashboard");
+//            logger.log(Level.WARNING, "ini testing logger");
             permissionService.save(permission1);
         };
     }

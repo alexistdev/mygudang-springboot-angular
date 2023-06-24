@@ -32,4 +32,6 @@ public class UserRoleServiceImplement implements UserRoleService {
         return userRoleRepository.findByUserId(userId);
     }
 
+
+
 }

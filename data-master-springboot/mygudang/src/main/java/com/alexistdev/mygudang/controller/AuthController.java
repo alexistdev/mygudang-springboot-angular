@@ -1,7 +1,9 @@
 package com.alexistdev.mygudang.controller;
 
 import com.alexistdev.mygudang.dao.MenuDAO;
-import com.alexistdev.mygudang.dto.*;
+import com.alexistdev.mygudang.dto.LoginDTO;
+import com.alexistdev.mygudang.dto.LoginResDTO;
+import com.alexistdev.mygudang.dto.ResponseData;
 import com.alexistdev.mygudang.entity.Menu;
 import com.alexistdev.mygudang.entity.RoleMenu;
 import com.alexistdev.mygudang.entity.User;
@@ -14,7 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +47,8 @@ public class AuthController {
         List<String> message = new ArrayList<>();
         ResponseData<LoginResDTO> responseData = new ResponseData<>();
         User whoIam = userservice.findByEmail(user.getUn());
-        if(whoIam != null){
-            if(userservice.authenticateLogin(user.getPw(),whoIam.getPassword())){
+        if (whoIam != null) {
+            if (userservice.authenticateLogin(user.getPw(), whoIam.getPassword())) {
                 LoginResDTO loginResDTO = new LoginResDTO();
                 loginResDTO.setId(whoIam.getId());
                 loginResDTO.setName(whoIam.getName());
@@ -65,18 +71,18 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
     }
 
-    private List<MenuDAO> getDataMenuList(String id) throws Exception{
+    private List<MenuDAO> getDataMenuList(String id) throws Exception {
         List<MenuDAO> menuList = new ArrayList<>();
         UserRole userRole = userRoleService.getByUserId(id);
-        if(ObjectUtils.isEmpty(userRole)){
+        if (ObjectUtils.isEmpty(userRole)) {
             return menuList;
         }
         List<RoleMenu> roleMenuList = roleMenuService.getByRoleId(userRole.getRole().getId());
-        roleMenuList.forEach((result)-> menuList.add(convertDAO(result.getMenu())));
+        roleMenuList.forEach((result) -> menuList.add(convertDAO(result.getMenu())));
         return menuList;
     }
 
-    private MenuDAO convertDAO(Menu menu){
+    private MenuDAO convertDAO(Menu menu) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(menu, MenuDAO.class);
     }
