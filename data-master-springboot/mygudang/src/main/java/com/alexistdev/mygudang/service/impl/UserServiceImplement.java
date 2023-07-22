@@ -1,8 +1,7 @@
 package com.alexistdev.mygudang.service.impl;
 
-import com.alexistdev.mygudang.dto.UserDTO;
-import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.entity.User;
+import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.repository.UserRepository;
 import com.alexistdev.mygudang.service.RoleService;
 import com.alexistdev.mygudang.service.UserService;
@@ -13,13 +12,15 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Repository
 public class UserServiceImplement implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -31,12 +32,16 @@ public class UserServiceImplement implements UserService {
     public User save(User users) throws Exception {
         User insertUser = new User();
         Date now = new Date();
+        if(roleRepository.findById(users.getRole().getId()) == null){
+            throw  new Exception("role tidak ditemukan !");
+        }
         insertUser.setName(users.getName());
         insertUser.setEmail(users.getEmail());
         insertUser.setPassword(passwordEncoder.encode(users.getPassword()));
         insertUser.setPhone(users.getPhone());
         insertUser.setCreatedAt(now);
         insertUser.setUpdatedAt(now);
+        insertUser.setRole(users.getRole());
         return userRepository.save(insertUser);
     }
 

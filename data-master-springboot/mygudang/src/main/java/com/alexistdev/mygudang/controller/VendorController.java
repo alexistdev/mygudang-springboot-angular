@@ -29,9 +29,9 @@ public class VendorController {
     public ResponseEntity<ResponseData<Vendor>> create(@Valid @RequestBody VendorDTO vendorDTO, Errors errors){
         ResponseData<Vendor> responseData = new ResponseData<>();
         if (errors.hasErrors()) {
-            for(ObjectError error: errors.getAllErrors()){
-                responseData.getMessages().add(error.getDefaultMessage());
-            }
+//            for(ObjectError error: errors.getAllErrors()){
+//                responseData.getMessages().add(error.getDefaultMessage());
+//            }
             responseData.setStatus(false);
             responseData.setData(null);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
@@ -52,9 +52,9 @@ public class VendorController {
     public ResponseEntity<ResponseData<Vendor>> update(@Valid @RequestBody VendorDTO vendorDTO,Errors errors){
         ResponseData<Vendor> responseData = new ResponseData<>();
         if (errors.hasErrors()) {
-            for(ObjectError error: errors.getAllErrors()){
-                responseData.getMessages().add(error.getDefaultMessage());
-            }
+//            for(ObjectError error: errors.getAllErrors()){
+//                responseData.getMessages().add(error.getDefaultMessage());
+//            }
             responseData.setStatus(false);
             responseData.setData(null);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);

@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 public class ResponseData<T> {
     private boolean status;
-    private List<String> messages= new ArrayList<>();
+    private String messages="";
 
     private T data;
 

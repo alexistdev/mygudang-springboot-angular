@@ -27,6 +27,10 @@ public class User extends AuditEntity implements Serializable {
     @Column(name = "id", columnDefinition = "VARCHAR(50)")
     private String id;
 
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Role role;
+
     @NotEmpty(message = "Name is required")
     @Column(name = "name")
     private String name;

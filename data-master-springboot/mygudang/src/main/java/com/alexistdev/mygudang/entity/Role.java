@@ -24,7 +24,7 @@ public class Role extends AuditEntity {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name="uuid2", strategy = "uuid2")
-    @Column(name = "id", columnDefinition = "VARCHAR(50)")
+    @Column(name = "id", columnDefinition = "VARCHAR(255)")
     private String id;
 
     @Column(name="name", nullable = false)
@@ -32,5 +32,8 @@ public class Role extends AuditEntity {
 
     @Column(name="description", nullable = false)
     private String description;
+
+    @OneToOne(mappedBy = "role")
+    private User user;
 
 }

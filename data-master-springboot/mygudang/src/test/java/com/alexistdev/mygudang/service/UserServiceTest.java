@@ -1,7 +1,6 @@
 package com.alexistdev.mygudang.service;
 
 import com.alexistdev.mygudang.entity.User;
-import com.alexistdev.mygudang.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

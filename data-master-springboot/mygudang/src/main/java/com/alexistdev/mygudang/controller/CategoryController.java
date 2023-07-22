@@ -28,9 +28,9 @@ public class CategoryController {
         ResponseData<Category> responseData = new ResponseData<>();
         try{
             if (errors.hasErrors()) {
-                for(ObjectError error: errors.getAllErrors()){
-                    responseData.getMessages().add(error.getDefaultMessage());
-                }
+//                for(ObjectError error: errors.getAllErrors()){
+//                    responseData.getMessages(error.getDefaultMessage());
+//                }
                 responseData.setStatus(false);
                 responseData.setData(null);
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);

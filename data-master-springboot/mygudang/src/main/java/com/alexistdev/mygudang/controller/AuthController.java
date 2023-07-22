@@ -5,17 +5,13 @@ import com.alexistdev.mygudang.dto.LoginDTO;
 import com.alexistdev.mygudang.dto.LoginResDTO;
 import com.alexistdev.mygudang.dto.ResponseData;
 import com.alexistdev.mygudang.entity.Menu;
-import com.alexistdev.mygudang.entity.RoleMenu;
 import com.alexistdev.mygudang.entity.User;
-import com.alexistdev.mygudang.entity.UserRole;
 import com.alexistdev.mygudang.service.RoleMenuService;
-import com.alexistdev.mygudang.service.UserRoleService;
 import com.alexistdev.mygudang.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +28,7 @@ public class AuthController {
     @Autowired
     private UserService userservice;
 
-    @Autowired
-    private UserRoleService userRoleService;
+
 
     @Autowired
     private RoleMenuService roleMenuService;
@@ -58,27 +53,26 @@ public class AuthController {
                 loginResDTO.setMenuList(getDataMenuList(whoIam.getId()));
                 loginResDTO.setRoleId(whoIam.getId());
                 responseData.setStatus(true);
-                message.add("Data berhasil didapatkan");
-                responseData.setMessages(message);
+                responseData.setMessages("Data berhasil didapatkan");
                 responseData.setData(loginResDTO);
                 return ResponseEntity.ok(responseData);
             }
         }
-        message.add("Gagal");
+
         responseData.setStatus(false);
-        responseData.setMessages(message);
+        responseData.setMessages("Gagal");
         responseData.setData(null);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
     }
 
     private List<MenuDAO> getDataMenuList(String id) throws Exception {
         List<MenuDAO> menuList = new ArrayList<>();
-        UserRole userRole = userRoleService.getByUserId(id);
-        if (ObjectUtils.isEmpty(userRole)) {
-            return menuList;
-        }
-        List<RoleMenu> roleMenuList = roleMenuService.getByRoleId(userRole.getRole().getId());
-        roleMenuList.forEach((result) -> menuList.add(convertDAO(result.getMenu())));
+//        UserRole userRole = userRoleService.getByUserId(id);
+//        if (ObjectUtils.isEmpty(userRole)) {
+//            return menuList;
+//        }
+//        List<RoleMenu> roleMenuList = roleMenuService.getByRoleId(userRole.getRole().getId());
+//        roleMenuList.forEach((result) -> menuList.add(convertDAO(result.getMenu())));
         return menuList;
     }
 

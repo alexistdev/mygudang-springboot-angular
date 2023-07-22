@@ -18,18 +18,24 @@ public class UserController {
     @Autowired
     private UserService userservice;
 
+    private String message;
+
     @PostMapping
-    public ResponseEntity<ResponseData> create(@Valid @RequestBody User user) throws Exception{
+    public ResponseEntity<?> create(@Valid @RequestBody User user) throws Exception{
         ResponseData<User> responseData = new ResponseData<>();
-        List<String> message = new ArrayList<>();
-        message.add("Data berhasil didapatkan");
-        responseData.setStatus(true);
-//        responseData.setPayload(userservice.save(user));
-        User data = userservice.save(user);
-        responseData.setData(data);
-        responseData.setMessages(message);
+        try{
+            User data = userservice.save(user);
+            responseData.setData(data);
+            responseData.setMessages(message);
+            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.CREATED);
+        }catch (Exception e){
+            responseData.setStatus(false);
+            responseData.setMessages(e.getMessage());
+            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
+        }
+
 //        return ResponseEntity.ok(responseData);
-        return new ResponseEntity<ResponseData>(responseData, HttpStatus.CREATED);
+
     }
 
 //    @GetMapping
