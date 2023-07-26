@@ -1,0 +1,7 @@
+security.ignored=/**;
+server.port=8901;
+spring.datasource.password=;
+spring.datasource.username=root;
+spring.jpa.hibernate.ddl-auto=create-drop;
+spring.jpa.show-sql=true;
+spring.sql.init.mode= always;

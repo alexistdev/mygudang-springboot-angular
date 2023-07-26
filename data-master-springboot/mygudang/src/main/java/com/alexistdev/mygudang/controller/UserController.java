@@ -21,7 +21,7 @@ public class UserController {
     private String message;
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody User user) throws Exception{
+    public ResponseEntity<?> create(@Valid @RequestBody User user){
         ResponseData<User> responseData = new ResponseData<>();
         try{
             User data = userservice.save(user);
@@ -33,9 +33,6 @@ public class UserController {
             responseData.setMessages(e.getMessage());
             return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
         }
-
-//        return ResponseEntity.ok(responseData);
-
     }
 
 //    @GetMapping

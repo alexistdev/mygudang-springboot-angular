@@ -36,4 +36,7 @@ public class Role extends AuditEntity {
     @OneToOne(mappedBy = "role")
     private User user;
 
+    @Column(name="status")
+    private String status;
+
 }
