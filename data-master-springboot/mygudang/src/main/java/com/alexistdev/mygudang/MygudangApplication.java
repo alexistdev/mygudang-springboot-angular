@@ -73,42 +73,45 @@ public class MygudangApplication {
         };
     }
 
-//    @Bean
-//    CommandLineRunner seedMenu() {
-//        return args -> {
-//            MenuDTO insertMenu = new MenuDTO();
-//            insertMenu.setName("Dashboard");
-//            insertMenu.setUrl("/dashboard");
-//            insertMenu.setLabel("bx bx-home-alt");
-//            insertMenu.setDescription("Halaman dashboard");
-//            insertMenu.setOrder(1);
-//            insertMenu.setCreatedBy("System");
-//            insertMenu.setModifiedBy("System");
-////            menuService.save(insertMenu);
-//
-//            MenuDTO insertMenu2 = new MenuDTO();
-//            insertMenu2.setName("Transaksi");
-//            insertMenu2.setUrl("/transaction");
-//            insertMenu2.setLabel("bx bx-data");
-//            insertMenu2.setDescription("Halaman transaksi");
-//            insertMenu2.setOrder(2);
-//            insertMenu2.setCreatedBy("System");
-//            insertMenu2.setModifiedBy("System");
-////            menuService.save(insertMenu2);
-//
-//            MenuDTO insertMenu3 = new MenuDTO();
-//            insertMenu3.setName("Data");
-//            insertMenu3.setUrl("/data");
-//            insertMenu3.setLabel("bx bx-data");
-//            insertMenu3.setDescription("Halaman data");
-//            insertMenu3.setOrder(3);
-//            insertMenu3.setCreatedBy("System");
-//            insertMenu3.setModifiedBy("System");
-////            menuService.save(insertMenu3);
-//
-//
-//        };
-//    }
+    @Bean
+    CommandLineRunner seedMenu() {
+        return args -> {
+            List<MenuDTO> listData = new ArrayList<>();
+
+            MenuDTO insertMenu = new MenuDTO();
+            insertMenu.setName("Dashboard");
+            insertMenu.setUrl("/dashboard");
+            insertMenu.setLabel("bx bx-home-alt");
+            insertMenu.setDescription("Halaman dashboard");
+            insertMenu.setOrder(1);
+            insertMenu.setCreatedBy("System");
+            insertMenu.setModifiedBy("System");
+
+            MenuDTO insertMenu2 = new MenuDTO();
+            insertMenu2.setName("Transaksi");
+            insertMenu2.setUrl("/transaction");
+            insertMenu2.setLabel("bx bx-data");
+            insertMenu2.setDescription("Halaman transaksi");
+            insertMenu2.setOrder(2);
+            insertMenu2.setCreatedBy("System");
+            insertMenu2.setModifiedBy("System");
+
+            MenuDTO insertMenu3 = new MenuDTO();
+            insertMenu3.setName("Data");
+            insertMenu3.setUrl("/data");
+            insertMenu3.setLabel("bx bx-data");
+            insertMenu3.setDescription("Halaman data");
+            insertMenu3.setOrder(3);
+            insertMenu3.setCreatedBy("System");
+            insertMenu3.setModifiedBy("System");
+            listData.add(insertMenu);
+            listData.add(insertMenu2);
+            listData.add(insertMenu3);
+            for(MenuDTO listData2: listData){
+                menuService.save(listData2);
+            }
+        };
+    }
 
 //    @Bean
 //    CommandLineRunner seedUser() {
