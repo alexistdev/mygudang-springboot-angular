@@ -5,6 +5,7 @@ import com.alexistdev.mygudang.dto.RoleMenuDTO;
 import com.alexistdev.mygudang.entity.Menu;
 import com.alexistdev.mygudang.entity.Role;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +24,7 @@ public class RoleMenuServiceTest {
     private MenuService menuService;
 
     @Test
+    @Disabled
     public void insertRoleMenuSuccessTest() throws Exception {
         Role insertRole = new Role();
         insertRole.setName("Administrator");

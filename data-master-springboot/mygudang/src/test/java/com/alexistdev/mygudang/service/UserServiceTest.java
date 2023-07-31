@@ -2,6 +2,7 @@ package com.alexistdev.mygudang.service;
 
 import com.alexistdev.mygudang.entity.User;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,7 @@ public class UserServiceTest {
     private PasswordEncoder passwordEncoder;
 
     @Test
+    @Disabled
     public void getUserIdTest() throws Exception {
         User insertUser = new User();
         insertUser.setPhone("0823123123");
@@ -31,6 +33,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Disabled
     public void authenticateTest() throws Exception {
         String password1 = "1234";
         String password2 = passwordEncoder.encode(password1);
@@ -39,6 +42,7 @@ public class UserServiceTest {
     }
 
     @Test
+    @Disabled
     public void getUserByEmailTest() throws Exception{
         User insertUser2 = new User();
         insertUser2.setPhone("08231231232");

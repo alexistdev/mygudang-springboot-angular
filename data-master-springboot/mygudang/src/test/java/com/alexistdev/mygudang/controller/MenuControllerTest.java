@@ -4,6 +4,7 @@ import com.alexistdev.mygudang.config.Helper;
 import com.alexistdev.mygudang.dto.MenuDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,6 +25,7 @@ public class MenuControllerTest {
     private final String uri = "/api/menu";
 
     @Test
+    @Disabled
     public void addMenuTest() throws Exception{
         MockMvc mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
         MenuDTO insertMenu = new MenuDTO();

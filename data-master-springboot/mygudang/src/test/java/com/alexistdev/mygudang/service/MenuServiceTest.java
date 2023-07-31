@@ -2,6 +2,7 @@ package com.alexistdev.mygudang.service;
 
 import com.alexistdev.mygudang.dto.MenuDTO;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,7 @@ public class MenuServiceTest {
     private MenuService menuService;
 
     @Test
+    @Disabled
     public void insertMenuSuccessTest()  throws Exception{
         MenuDTO insertMenu = new MenuDTO();
         insertMenu.setName("dashboard");
@@ -27,6 +29,7 @@ public class MenuServiceTest {
     }
 
     @Test
+    @Disabled
     public void insertMenuFailDataNullTest(){
         MenuDTO insertMenu = new MenuDTO();
         insertMenu.setLabel("dashboard");

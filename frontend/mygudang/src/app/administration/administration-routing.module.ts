@@ -3,6 +3,7 @@ import {RouterModule} from "@angular/router";
 import {TransaksiComponent} from "./component/transaksi/transaksi.component";
 import {DashboardComponent} from "./component/dashboard/dashboard.component";
 import {HomeStaffComponent} from "./component/home-staff/home-staff.component";
+import {RoleAdminComponent} from "./component/role-admin/role-admin.component";
 
 /**
 * Author: AlexistDev
@@ -25,8 +26,8 @@ const ADMINISTRATION_PATH = [
         component: DashboardComponent
       },
       {
-        path: 'transaksi',
-        component: TransaksiComponent
+        path: 'roles',
+        component: RoleAdminComponent
       },
     ]
   },

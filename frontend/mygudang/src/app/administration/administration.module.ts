@@ -6,16 +6,16 @@ import { TransaksiComponent } from './component/transaksi/transaksi.component';
 import {AdministrationRoutingModule} from "./administration-routing.module";
 import { WelcomeStaffComponent } from './component/welcome-staff/welcome-staff.component';
 import { HomeStaffComponent } from './component/home-staff/home-staff.component';
+import { RoleAdminComponent } from './component/role-admin/role-admin.component';
 
-
-
-
+// @ts-ignore
 @NgModule({
   declarations: [
     DashboardComponent,
     TransaksiComponent,
     WelcomeStaffComponent,
     HomeStaffComponent,
+    RoleAdminComponent,
 
   ],
   exports: [
