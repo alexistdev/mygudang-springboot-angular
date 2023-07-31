@@ -20,7 +20,7 @@ export class LoginService {
 
   doUserLogin(userName: string, userPwd: string): Observable<boolean>{
     return new Observable((observer: Observer<any>) => {
-      this.http.post('http://localhost:8084/api/auth/login', {'un': userName , 'pw' : userPwd})
+      this.http.post('http://localhost:8901/api/auth/login', {'un': userName , 'pw' : userPwd})
         .subscribe({
           next: (res) => {
             if(!res){

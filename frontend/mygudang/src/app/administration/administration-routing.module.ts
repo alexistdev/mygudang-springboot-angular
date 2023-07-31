@@ -17,6 +17,10 @@ const ADMINISTRATION_PATH = [
     component: HomeStaffComponent,
     children: [
       {
+        path: '',
+        component: DashboardComponent
+      },
+      {
         path: 'dashboard',
         component: DashboardComponent
       },
@@ -31,6 +35,7 @@ const ADMINISTRATION_PATH = [
 @NgModule({
   declarations: [],
   imports: [RouterModule.forChild(ADMINISTRATION_PATH)],
+  // imports:[],
   exports: [
     RouterModule
   ],
