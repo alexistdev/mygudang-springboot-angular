@@ -35,9 +35,6 @@ public class MygudangApplication {
     private RoleService roleService;
 
     @Autowired
-    private PermissionService permissionService;
-
-    @Autowired
     private MenuService menuService;
 
     @Autowired

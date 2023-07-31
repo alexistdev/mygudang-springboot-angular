@@ -5,13 +5,17 @@ import com.alexistdev.mygudang.dto.LoginDTO;
 import com.alexistdev.mygudang.dto.LoginResDTO;
 import com.alexistdev.mygudang.dto.ResponseData;
 import com.alexistdev.mygudang.entity.Menu;
+import com.alexistdev.mygudang.entity.Role;
+import com.alexistdev.mygudang.entity.RoleMenu;
 import com.alexistdev.mygudang.entity.User;
 import com.alexistdev.mygudang.service.RoleMenuService;
+import com.alexistdev.mygudang.service.RoleService;
 import com.alexistdev.mygudang.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +32,9 @@ public class AuthController {
     @Autowired
     private UserService userservice;
 
+    @Autowired
+    private RoleService roleService;
+
 
 
     @Autowired
@@ -39,7 +46,6 @@ public class AuthController {
 
     @PostMapping(value = LOGIN)
     public ResponseEntity<ResponseData<LoginResDTO>> doLogin(@RequestBody LoginDTO user) throws Exception {
-        List<String> message = new ArrayList<>();
         ResponseData<LoginResDTO> responseData = new ResponseData<>();
         User whoIam = userservice.findByEmail(user.getUn());
         if (whoIam != null) {
@@ -50,7 +56,7 @@ public class AuthController {
                 loginResDTO.setEmail(whoIam.getEmail());
                 loginResDTO.setPhone(whoIam.getPhone());
                 loginResDTO.setIsActive(whoIam.getIsActive());
-                loginResDTO.setMenuList(getDataMenuList(whoIam.getId()));
+                loginResDTO.setMenuList(getDataMenuList(whoIam));
                 loginResDTO.setRoleId(whoIam.getId());
                 responseData.setStatus(true);
                 responseData.setMessages("Data berhasil didapatkan");
@@ -65,14 +71,13 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
     }
 
-    private List<MenuDAO> getDataMenuList(String id) throws Exception {
+    private List<MenuDAO> getDataMenuList(User user) throws Exception {
         List<MenuDAO> menuList = new ArrayList<>();
-//        UserRole userRole = userRoleService.getByUserId(id);
-//        if (ObjectUtils.isEmpty(userRole)) {
-//            return menuList;
-//        }
-//        List<RoleMenu> roleMenuList = roleMenuService.getByRoleId(userRole.getRole().getId());
-//        roleMenuList.forEach((result) -> menuList.add(convertDAO(result.getMenu())));
+        List<RoleMenu> roleMenuList = roleMenuService.getByRoleId(user.getRole().getId());
+        if (ObjectUtils.isEmpty(roleMenuList)) {
+            return menuList;
+        }
+        roleMenuList.forEach((result) -> menuList.add(convertDAO(result.getMenu())));
         return menuList;
     }
 
