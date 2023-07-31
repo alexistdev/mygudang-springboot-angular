@@ -105,4 +105,9 @@ public class RoleServiceImplement implements RoleService {
         q.setMaxResults(rowPerPage);
         return q.getResultList();
     }
+
+    @Override
+    public Role getByName(String name) throws Exception {
+        return roleRepository.findByName(name);
+    }
 }

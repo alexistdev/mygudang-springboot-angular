@@ -113,39 +113,41 @@ public class MygudangApplication {
         };
     }
 
-//    @Bean
-//    CommandLineRunner seedUser() {
-//        return args -> {
-//            User user = new User();
-//            user.setName("Alex");
-//            user.setPassword("1234");
-//            user.setIsActive(1);
-//            user.setPhone("082371408678");
-//            user.setEmail("alexistdev@gmail.com");
-////            userService.save(user);
-//        };
-//    }
+    @Bean
+    CommandLineRunner seedUser() {
+        return args -> {
+            Role admin = roleService.getByName("Admin");
+            User user = new User();
+            user.setName("Alex");
+            user.setPassword("1234");
+            user.setIsActive(1);
+            user.setPhone("082371408678");
+            user.setEmail("alexistdev@gmail.com");
+            user.setRole(admin);
+            userService.save(user);
+        };
+    }
 
-//    @Bean
-//    CommandLineRunner seedRoleMenu() {
-//        return args -> {
-//            List<Role> roles = roleService.getAll();
-//            List<Menu> menus = menuService.getAll();
-//            RoleMenuDTO roleMenuDTO = new RoleMenuDTO();
-//            roleMenuDTO.setRole(roles.get(0));
-//            roleMenuDTO.setMenu(menus.get(0));
-//            roleMenuDTO.setCreatedBy("System");
-//            roleMenuDTO.setModifiedBy("System");
-////            roleMenuService.save(roleMenuDTO);
-//
-//            RoleMenuDTO roleMenuDTO2 = new RoleMenuDTO();
-//            roleMenuDTO2.setRole(roles.get(0));
-//            roleMenuDTO2.setMenu(menus.get(1));
-//            roleMenuDTO2.setCreatedBy("System");
-//            roleMenuDTO2.setModifiedBy("System");
-////            roleMenuService.save(roleMenuDTO2);
-//        };
-//    }
+    @Bean
+    CommandLineRunner seedRoleMenu() {
+        return args -> {
+            Role admin = roleService.getByName("Admin");
+            List<Menu> menus = menuService.getAll();
+            RoleMenuDTO roleMenuDTO = new RoleMenuDTO();
+            roleMenuDTO.setRole(admin);
+            roleMenuDTO.setMenu(menus.get(0));
+            roleMenuDTO.setCreatedBy("System");
+            roleMenuDTO.setModifiedBy("System");
+            roleMenuService.save(roleMenuDTO);
+
+            RoleMenuDTO roleMenuDTO2 = new RoleMenuDTO();
+            roleMenuDTO2.setRole(admin);
+            roleMenuDTO2.setMenu(menus.get(1));
+            roleMenuDTO2.setCreatedBy("System");
+            roleMenuDTO2.setModifiedBy("System");
+            roleMenuService.save(roleMenuDTO2);
+        };
+    }
 
 //    @Bean
 //    CommandLineRunner seedPermission() {

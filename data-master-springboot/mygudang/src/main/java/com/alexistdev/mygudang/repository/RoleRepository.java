@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface RoleRepository extends JpaRepository<Role,String> {
 
-    List<Role> findByNameContains(String name);
+    Role findByName(String name);
 }
