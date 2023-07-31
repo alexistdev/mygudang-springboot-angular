@@ -38,6 +38,7 @@ public class RoleServiceImplement implements RoleService {
         insertRole.setDescription(role.getDescription());
         insertRole.setCreatedBy(role.getCreatedBy());
         insertRole.setModifiedBy(role.getModifiedBy());
+        insertRole.setStatus("1");
         insertRole.setCreatedAt(now);
         insertRole.setUpdatedAt(now);
         return roleRepository.save(insertRole);
@@ -70,13 +71,13 @@ public class RoleServiceImplement implements RoleService {
         CriteriaBuilder critB = em.getCriteriaBuilder();
         CriteriaQuery<Long> query = critB.createQuery(Long.class);
         Root<Role> rootRole = query.from(Role.class);
-        query.select(critB.count(rootRole)).where(
+        query.select(critB.count(rootRole))
+                .where(
               critB.and(
                       critB.equal(rootRole.get("status"), statusFlag),
                       createSingleSearchPredicate(rootRole, field, value)
-
-              )
-        );
+              ))
+        ;
         return em.createQuery(query).getSingleResult().intValue();
     }
 
@@ -85,7 +86,7 @@ public class RoleServiceImplement implements RoleService {
         if(!value.equals("")){
             return !value.equals("") ? critB.equal(rootRole.get(field),value) : critB.like(rootRole.get(field), "%" + value + "%");
         } else {
-            return critB.and(new Predicate[0]);
+            return critB.and();
         }
     }
 
@@ -94,7 +95,11 @@ public class RoleServiceImplement implements RoleService {
         CriteriaQuery<Role> query = critB.createQuery(Role.class);
         Root<Role> rootRole = query.from(Role.class);
         Order o = sortDir.equals("1") ? critB.asc(rootRole.get(sort)) : critB.desc(rootRole.get(sort));
-//        query.select(rootRole).where(critB.and(critB.equal(rootRole.get("status"),"1"), this.createSingleSearchPredicate(rootRole, field,value))).orderBy(new Order[]{o});
+        query.select(rootRole).where(
+                critB.and(
+                        critB.equal(rootRole.get("status"),"1"),
+                        this.createSingleSearchPredicate(rootRole, field,value))
+        ).orderBy(o);
         TypedQuery<Role> q = this.em.createQuery(query);
         q.setFirstResult(startRow);
         q.setMaxResults(rowPerPage);
