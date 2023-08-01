@@ -1,6 +1,7 @@
 package com.alexistdev.mygudang.controller;
 
 
+import com.alexistdev.mygudang.dao.RoleDAO;
 import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.response.CommonPaging;
@@ -32,7 +33,7 @@ public class RoleController {
     private RoleRepository roleRepository;
 
     @PostMapping
-    public Role create(@RequestBody Role role) throws Exception{
+    public RoleDAO create(@RequestBody RoleDAO role) throws Exception{
         return roleService.save(role);
     }
 

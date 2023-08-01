@@ -1,12 +1,13 @@
 package com.alexistdev.mygudang.service;
 
+import com.alexistdev.mygudang.dao.RoleDAO;
 import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.response.CommonPaging;
 
 import java.util.List;
 
 public interface RoleService {
-    Role save(Role role) throws Exception;
+    RoleDAO save(RoleDAO role) throws Exception;
 
     Role getByName(String name) throws Exception;
 

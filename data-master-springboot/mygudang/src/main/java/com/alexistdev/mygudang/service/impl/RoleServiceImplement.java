@@ -1,6 +1,9 @@
 package com.alexistdev.mygudang.service.impl;
 
 import com.alexistdev.mygudang.controller.RoleController;
+import com.alexistdev.mygudang.dao.RoleDAO;
+import com.alexistdev.mygudang.dto.PermissionDTO;
+import com.alexistdev.mygudang.entity.Permission;
 import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.response.CommonPaging;
@@ -9,9 +12,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -29,8 +34,13 @@ public class RoleServiceImplement implements RoleService {
     @Autowired
     RoleRepository roleRepository;
 
+    @Lazy
+    @Autowired
+    private ModelMapper modelMapper;
+
+
     @Override
-    public Role save(Role role) throws Exception
+    public RoleDAO save(RoleDAO role) throws Exception
     {
         Date now = new Date();
         Role insertRole = new Role();
@@ -41,7 +51,12 @@ public class RoleServiceImplement implements RoleService {
         insertRole.setStatus("1");
         insertRole.setCreatedAt(now);
         insertRole.setUpdatedAt(now);
-        return roleRepository.save(insertRole);
+        Role result = roleRepository.save(insertRole);
+        return this.convertDTO(result);
+    }
+
+    private RoleDAO convertDTO(Role role) throws Exception {
+        return modelMapper.map(role, RoleDAO.class);
     }
 
     @Override
