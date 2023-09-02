@@ -5,6 +5,7 @@ import com.alexistdev.mygudang.dao.RoleDAO;
 import com.alexistdev.mygudang.dto.PermissionDTO;
 import com.alexistdev.mygudang.entity.Permission;
 import com.alexistdev.mygudang.entity.Role;
+import com.alexistdev.mygudang.exception.DuplicatException;
 import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.response.CommonPaging;
 import com.alexistdev.mygudang.service.RoleService;
@@ -43,6 +44,10 @@ public class RoleServiceImplement implements RoleService {
     public RoleDAO save(RoleDAO role) throws Exception
     {
         Date now = new Date();
+        Role cekRole = roleRepository.findByName(role.getName());
+        if(cekRole != null){
+            throw  new DuplicatException("Data sudah ada");
+        }
         Role insertRole = new Role();
         insertRole.setName(role.getName());
         insertRole.setDescription(role.getDescription());

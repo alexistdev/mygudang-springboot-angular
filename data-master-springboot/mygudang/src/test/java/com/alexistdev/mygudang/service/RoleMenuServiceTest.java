@@ -26,28 +26,28 @@ public class RoleMenuServiceTest {
     @Test
     @Disabled
     public void insertRoleMenuSuccessTest() throws Exception {
-        Role insertRole = new Role();
-        insertRole.setName("Administrator");
-        insertRole.setDescription("Halaman Administrator");
-        insertRole.setCreatedBy("Testing");
-        insertRole.setModifiedBy("Testing");
-        Role resultRole = roleService.save(insertRole);
-
-        MenuDTO insertMenu = new MenuDTO();
-        insertMenu.setLabel("dashboard");
-        insertMenu.setDescription("halaman dashboard");
-        insertMenu.setUrl("/dashboard");
-        insertMenu.setLabel("dashboard");
-        insertMenu.setCreatedBy("Testing");
-        insertMenu.setModifiedBy("Testing");
-        Menu resultMenu = menuService.save(insertMenu);
-
-        RoleMenuDTO roleMenuDTO = new RoleMenuDTO();
-        roleMenuDTO.setRole(resultRole);
-        roleMenuDTO.setMenu(resultMenu);
-        roleMenuDTO.setCreatedBy("Testing");
-        roleMenuDTO.setModifiedBy("Testing");
-        Assertions.assertNotNull(roleMenuService.save(roleMenuDTO));
+//        Role insertRole = new Role();
+//        insertRole.setName("Administrator");
+//        insertRole.setDescription("Halaman Administrator");
+//        insertRole.setCreatedBy("Testing");
+//        insertRole.setModifiedBy("Testing");
+//        Role resultRole = roleService.save(insertRole);
+//
+//        MenuDTO insertMenu = new MenuDTO();
+//        insertMenu.setLabel("dashboard");
+//        insertMenu.setDescription("halaman dashboard");
+//        insertMenu.setUrl("/dashboard");
+//        insertMenu.setLabel("dashboard");
+//        insertMenu.setCreatedBy("Testing");
+//        insertMenu.setModifiedBy("Testing");
+//        Menu resultMenu = menuService.save(insertMenu);
+//
+//        RoleMenuDTO roleMenuDTO = new RoleMenuDTO();
+//        roleMenuDTO.setRole(resultRole);
+//        roleMenuDTO.setMenu(resultMenu);
+//        roleMenuDTO.setCreatedBy("Testing");
+//        roleMenuDTO.setModifiedBy("Testing");
+//        Assertions.assertNotNull(roleMenuService.save(roleMenuDTO));
 
     }
 

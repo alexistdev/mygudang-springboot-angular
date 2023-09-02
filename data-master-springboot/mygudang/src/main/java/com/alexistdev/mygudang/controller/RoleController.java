@@ -2,7 +2,10 @@ package com.alexistdev.mygudang.controller;
 
 
 import com.alexistdev.mygudang.dao.RoleDAO;
+import com.alexistdev.mygudang.dto.ResponseData;
 import com.alexistdev.mygudang.entity.Role;
+import com.alexistdev.mygudang.entity.User;
+import com.alexistdev.mygudang.exception.DuplicatException;
 import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.response.CommonPaging;
 import com.alexistdev.mygudang.response.CommonResponse;
@@ -10,10 +13,13 @@ import com.alexistdev.mygudang.response.CommonResponsePaging;
 import com.alexistdev.mygudang.service.RoleService;
 import com.alexistdev.mygudang.utils.JsonUtil;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,8 +39,23 @@ public class RoleController {
     private RoleRepository roleRepository;
 
     @PostMapping
-    public RoleDAO create(@RequestBody RoleDAO role) throws Exception{
-        return roleService.save(role);
+    public ResponseEntity<?> create(@Valid @RequestBody RoleDAO role){
+        ResponseData<RoleDAO> responseData = new ResponseData<>();
+        responseData.setStatus(false);
+        try{
+            RoleDAO roleDAO =roleService.save(role);
+            responseData.setStatus(true);
+            responseData.setData(roleDAO);
+            responseData.setMessages("Data berhasil dibuat!");
+            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.CREATED);
+        }catch (DuplicatException e){
+            responseData.setMessages(e.getMessage());
+            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            responseData.setMessages(e.getMessage());
+            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @GetMapping(value = GET_LIST_ROLE)
