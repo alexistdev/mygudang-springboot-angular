@@ -39,7 +39,6 @@ public class RoleServiceImplement implements RoleService {
     @Autowired
     private ModelMapper modelMapper;
 
-
     @Override
     public RoleDAO save(RoleDAO role) throws Exception
     {

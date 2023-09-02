@@ -16,6 +16,5 @@ public class RoleDAO {
     private String name;
     @NotNull(message = "Description should not be empty")
     private String description;
-
     private String status;
 }
