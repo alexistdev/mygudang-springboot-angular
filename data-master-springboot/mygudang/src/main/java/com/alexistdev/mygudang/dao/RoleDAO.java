@@ -1,13 +1,13 @@
 package com.alexistdev.mygudang.dao;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class RoleDAO {
 
     private String createdBy;
@@ -17,4 +17,6 @@ public class RoleDAO {
     @NotNull(message = "Description should not be empty")
     private String description;
     private String status;
+
+
 }

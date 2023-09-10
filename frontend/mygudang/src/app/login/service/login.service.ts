@@ -31,6 +31,7 @@ export class LoginService {
             let data = parsedJson.data;
             this.menuList = data.menuList;
             this.localStorageService.setItem("menu",JSON.stringify( this.menuList));
+            this.localStorageService.setItem("userId",data.id);
             observer.next(true);
           },
           error: (e) => {

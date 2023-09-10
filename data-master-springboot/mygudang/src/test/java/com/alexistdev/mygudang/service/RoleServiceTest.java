@@ -4,35 +4,71 @@ import com.alexistdev.mygudang.dao.RoleDAO;
 import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.exception.DuplicatException;
 import com.alexistdev.mygudang.repository.RoleRepository;
-import com.alexistdev.mygudang.response.CommonPaging;
+import com.alexistdev.mygudang.service.impl.RoleServiceImplement;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.extension.Extensions;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class RoleServiceTest {
 
     @Mock
-    private RoleService roleService;
+    private RoleRepository roleRepository;
 
-    @Test
-    public void addRoleTest() throws Exception {
-        RoleDAO roleDAO = new RoleDAO();
-        lenient().when(roleService.save(any(RoleDAO.class))).thenReturn(roleDAO);
-        Assertions.assertNull(roleDAO.getName());
+    @InjectMocks
+    private RoleServiceImplement roleService;
+
+    private RoleDAO roleDAO;
+
+    private Role role;
+
+    public EntityManager em;
+
+
+    @BeforeEach
+    public void setup() {
+        roleDAO = RoleDAO.builder()
+                .createdBy("system test")
+                .modifiedBy("system test")
+                .name("test")
+                .description("test description")
+                .build();
+
+        role = Role.builder()
+                .name("test")
+                .description("test description")
+                .status("1")
+                .build();
+
     }
 
+    @DisplayName("Testing for Role Service")
+    @Test
+    public void when_save_role_should_return_role_test() throws Exception {
+        when(roleRepository.save(any(Role.class))).thenReturn(new Role());
+        Role created = roleService.save(roleDAO);
+        Assertions.assertEquals(created.getName(), roleDAO.getName());
+    }
+
+    @DisplayName("Duplicate Role")
+    @Test
+    public void duplicate_role_name_throw_errors(){
+        em.persist(role);
+        DuplicatException thrown = Assertions.assertThrows(DuplicatException.class, () -> {
+            roleService.save(roleDAO);
+        });
+        Assertions.assertEquals("Already registered", thrown.getMessage());
+    }
 }

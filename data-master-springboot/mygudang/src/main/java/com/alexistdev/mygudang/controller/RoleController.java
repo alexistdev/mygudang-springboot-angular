@@ -4,11 +4,9 @@ package com.alexistdev.mygudang.controller;
 import com.alexistdev.mygudang.dao.RoleDAO;
 import com.alexistdev.mygudang.dto.ResponseData;
 import com.alexistdev.mygudang.entity.Role;
-import com.alexistdev.mygudang.entity.User;
 import com.alexistdev.mygudang.exception.DuplicatException;
 import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.response.CommonPaging;
-import com.alexistdev.mygudang.response.CommonResponse;
 import com.alexistdev.mygudang.response.CommonResponsePaging;
 import com.alexistdev.mygudang.service.RoleService;
 import com.alexistdev.mygudang.utils.JsonUtil;
@@ -18,11 +16,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Date;
 
 
 @RestController
@@ -39,18 +36,25 @@ public class RoleController {
     private RoleRepository roleRepository;
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody RoleDAO role){
-        ResponseData<RoleDAO> responseData = new ResponseData<>();
+    public ResponseEntity<?> create(@Valid @RequestBody RoleDAO roleDao){
+        ResponseData<Role> responseData = new ResponseData<>();
         responseData.setStatus(false);
         try{
-            RoleDAO roleDAO =roleService.save(role);
+            RoleDAO insertRole = new RoleDAO();
+            insertRole.setName(roleDao.getName());
+            insertRole.setDescription(roleDao.getDescription());
+            insertRole.setCreatedBy(roleDao.getCreatedBy());
+            insertRole.setModifiedBy(roleDao.getModifiedBy());
+            insertRole.setStatus("1");
+            Role result =roleService.save(insertRole);
+
             responseData.setStatus(true);
-            responseData.setData(roleDAO);
+            responseData.setData(result);
             responseData.setMessages("Data berhasil dibuat!");
             return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.CREATED);
-        }catch (DuplicatException e){
-            responseData.setMessages(e.getMessage());
-            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
+//        }catch (DuplicatException e){
+//            responseData.setMessages(e.getMessage());
+//            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             responseData.setMessages(e.getMessage());
             return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);

@@ -2,9 +2,7 @@ package com.alexistdev.mygudang.service.impl;
 
 import com.alexistdev.mygudang.dto.PermissionDTO;
 import com.alexistdev.mygudang.entity.Permission;
-import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.repository.PermissionRepository;
-import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.service.PermissionService;
 import com.alexistdev.mygudang.service.RoleService;
 import org.modelmapper.ModelMapper;

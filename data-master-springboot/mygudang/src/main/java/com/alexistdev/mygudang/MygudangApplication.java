@@ -59,82 +59,82 @@ public class MygudangApplication {
             names.put("Admin","Administrator");
             names.put("Admin Gudang","Admin Gudang Input Stock");
             names.put("Admin PO","Admin untuk membuat PO");
-            for (Map.Entry<String, String> set : names.entrySet()) {
-                Role role = new Role();
-                role.setName(set.getKey());
-                role.setDescription(set.getValue());
-                role.setCreatedBy("System");
-                role.setModifiedBy("System");
-                roleService.save(role);
-            }
+//            for (Map.Entry<String, String> set : names.entrySet()) {
+//                Role role = new Role();
+//                role.setName(set.getKey());
+//                role.setDescription(set.getValue());
+//                role.setCreatedBy("System");
+//                role.setModifiedBy("System");
+//                roleService.save(role);
+//            }
         };
     }
 
     @Bean
     CommandLineRunner seedMenu() {
         return args -> {
-            List<MenuDTO> listData = new ArrayList<>();
-
-            MenuDTO insertMenu = new MenuDTO();
-            insertMenu.setName("Dashboard");
-            insertMenu.setUrl("/staff/dashboard");
-            insertMenu.setLabel("bx bx-home-alt");
-            insertMenu.setDescription("Halaman dashboard");
-            insertMenu.setOrder(1);
-            insertMenu.setCreatedBy("System");
-            insertMenu.setModifiedBy("System");
-
-            MenuDTO insertMenu2 = new MenuDTO();
-            insertMenu2.setName("Role");
-            insertMenu2.setUrl("/staff/roles");
-            insertMenu2.setLabel("bx bx-data");
-            insertMenu2.setDescription("Halaman roles");
-            insertMenu2.setOrder(2);
-            insertMenu2.setCreatedBy("System");
-            insertMenu2.setModifiedBy("System");
-
-
-            listData.add(insertMenu);
-            listData.add(insertMenu2);
-            for(MenuDTO listData2: listData){
-                menuService.save(listData2);
-            }
+//            List<MenuDTO> listData = new ArrayList<>();
+//
+//            MenuDTO insertMenu = new MenuDTO();
+//            insertMenu.setName("Dashboard");
+//            insertMenu.setUrl("/staff/dashboard");
+//            insertMenu.setLabel("bx bx-home-alt");
+//            insertMenu.setDescription("Halaman dashboard");
+//            insertMenu.setOrder(1);
+//            insertMenu.setCreatedBy("System");
+//            insertMenu.setModifiedBy("System");
+//
+//            MenuDTO insertMenu2 = new MenuDTO();
+//            insertMenu2.setName("Role");
+//            insertMenu2.setUrl("/staff/roles");
+//            insertMenu2.setLabel("bx bx-data");
+//            insertMenu2.setDescription("Halaman roles");
+//            insertMenu2.setOrder(2);
+//            insertMenu2.setCreatedBy("System");
+//            insertMenu2.setModifiedBy("System");
+//
+//
+//            listData.add(insertMenu);
+//            listData.add(insertMenu2);
+//            for(MenuDTO listData2: listData){
+//                menuService.save(listData2);
+//            }
         };
     }
 
     @Bean
     CommandLineRunner seedUser() {
         return args -> {
-            Role admin = roleService.getByName("Admin");
-            User user = new User();
-            user.setName("Alex");
-            user.setPassword("1234");
-            user.setIsActive(1);
-            user.setPhone("082371408678");
-            user.setEmail("alexistdev@gmail.com");
-            user.setRole(admin);
-            userService.save(user);
+//            Role admin = roleService.getByName("Admin");
+//            User user = new User();
+//            user.setName("Alex");
+//            user.setPassword("1234");
+//            user.setIsActive(1);
+//            user.setPhone("082371408678");
+//            user.setEmail("alexistdev@gmail.com");
+//            user.setRole(admin);
+//            userService.save(user);
         };
     }
 
     @Bean
     CommandLineRunner seedRoleMenu() {
         return args -> {
-            Role admin = roleService.getByName("Admin");
-            List<Menu> menus = menuService.getAll();
-            RoleMenuDTO roleMenuDTO = new RoleMenuDTO();
-            roleMenuDTO.setRole(admin);
-            roleMenuDTO.setMenu(menus.get(0));
-            roleMenuDTO.setCreatedBy("System");
-            roleMenuDTO.setModifiedBy("System");
-            roleMenuService.save(roleMenuDTO);
-
-            RoleMenuDTO roleMenuDTO2 = new RoleMenuDTO();
-            roleMenuDTO2.setRole(admin);
-            roleMenuDTO2.setMenu(menus.get(1));
-            roleMenuDTO2.setCreatedBy("System");
-            roleMenuDTO2.setModifiedBy("System");
-            roleMenuService.save(roleMenuDTO2);
+//            Role admin = roleService.getByName("Admin");
+//            List<Menu> menus = menuService.getAll();
+//            RoleMenuDTO roleMenuDTO = new RoleMenuDTO();
+//            roleMenuDTO.setRole(admin);
+//            roleMenuDTO.setMenu(menus.get(0));
+//            roleMenuDTO.setCreatedBy("System");
+//            roleMenuDTO.setModifiedBy("System");
+//            roleMenuService.save(roleMenuDTO);
+//
+//            RoleMenuDTO roleMenuDTO2 = new RoleMenuDTO();
+//            roleMenuDTO2.setRole(admin);
+//            roleMenuDTO2.setMenu(menus.get(1));
+//            roleMenuDTO2.setCreatedBy("System");
+//            roleMenuDTO2.setModifiedBy("System");
+//            roleMenuService.save(roleMenuDTO2);
         };
     }
 

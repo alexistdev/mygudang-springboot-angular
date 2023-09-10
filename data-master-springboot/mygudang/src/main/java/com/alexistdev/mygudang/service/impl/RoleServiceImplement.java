@@ -2,9 +2,8 @@ package com.alexistdev.mygudang.service.impl;
 
 import com.alexistdev.mygudang.controller.RoleController;
 import com.alexistdev.mygudang.dao.RoleDAO;
-import com.alexistdev.mygudang.dto.PermissionDTO;
-import com.alexistdev.mygudang.entity.Permission;
 import com.alexistdev.mygudang.entity.Role;
+import com.alexistdev.mygudang.entity.User;
 import com.alexistdev.mygudang.exception.DuplicatException;
 import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.response.CommonPaging;
@@ -18,13 +17,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
-@Repository
+@Service
 public class RoleServiceImplement implements RoleService {
 
     private Logger logger = LoggerFactory.getLogger(RoleController.class);
@@ -33,35 +34,37 @@ public class RoleServiceImplement implements RoleService {
     private EntityManager em;
 
     @Autowired
-    RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
     @Lazy
     @Autowired
     private ModelMapper modelMapper;
 
+
     @Override
-    public RoleDAO save(RoleDAO role) throws Exception
+    public Role save(RoleDAO roleDAO) throws DuplicatException
     {
-        Date now = new Date();
-        Role cekRole = roleRepository.findByName(role.getName());
-        if(cekRole != null){
-            throw  new DuplicatException("Data sudah ada");
+
+        Optional<Role> cekRole = roleRepository.findByName(roleDAO.getName());
+        if(cekRole.isPresent()){
+            throw  new RuntimeException("Already registered");
         }
-        Role insertRole = new Role();
-        insertRole.setName(role.getName());
-        insertRole.setDescription(role.getDescription());
-        insertRole.setCreatedBy(role.getCreatedBy());
-        insertRole.setModifiedBy(role.getModifiedBy());
-        insertRole.setStatus("1");
-        insertRole.setCreatedAt(now);
-        insertRole.setUpdatedAt(now);
-        Role result = roleRepository.save(insertRole);
-        return this.convertDTO(result);
+        Date now = new Date();
+        Role role = new Role();
+        role.setCreatedBy(roleDAO.getCreatedBy());
+        role.setModifiedBy(roleDAO.getModifiedBy());
+        role.setStatus("1");
+        role.setName(roleDAO.getName());
+        role.setDescription(roleDAO.getDescription());
+        role.setCreatedAt(now);
+        role.setUpdatedAt(now);
+        roleRepository.save(role);
+        return role;
     }
 
-    private RoleDAO convertDTO(Role role) throws Exception {
-        return modelMapper.map(role, RoleDAO.class);
-    }
+//    private RoleDAO convertDTO(Role role) throws Exception {
+//        return modelMapper.map(role, RoleDAO.class);
+//    }
 
     @Override
     public Role getById(String id) throws Exception {
@@ -125,8 +128,8 @@ public class RoleServiceImplement implements RoleService {
         return q.getResultList();
     }
 
-    @Override
-    public Role getByName(String name) throws Exception {
-        return roleRepository.findByName(name);
-    }
+//    @Override
+//    public Role getByName(String name) throws Exception {
+//        return roleRepository.findByName(name);
+//    }
 }
