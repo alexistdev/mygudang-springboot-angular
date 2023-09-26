@@ -5,8 +5,6 @@ import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
 public class RoleDAO {
 
@@ -18,5 +16,14 @@ public class RoleDAO {
     private String description;
     private String status;
 
+    public RoleDAO() {
+    }
 
+    public RoleDAO(String name,String description,String status, String createdBy,String modifiedBy) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.createdBy = createdBy;
+        this.modifiedBy = modifiedBy;
+    }
 }

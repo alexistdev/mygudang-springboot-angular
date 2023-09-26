@@ -12,6 +12,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,12 @@ public class RoleServiceImplement implements RoleService {
     @Autowired
     private ModelMapper modelMapper;
 
+    public RoleServiceImplement(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
+
+    public RoleServiceImplement() {
+    }
 
     @Override
     public Role save(RoleDAO roleDAO) throws DuplicatException
@@ -61,10 +68,6 @@ public class RoleServiceImplement implements RoleService {
         roleRepository.save(role);
         return role;
     }
-
-//    private RoleDAO convertDTO(Role role) throws Exception {
-//        return modelMapper.map(role, RoleDAO.class);
-//    }
 
     @Override
     public Role getById(String id) throws Exception {
