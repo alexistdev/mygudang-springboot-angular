@@ -18,6 +18,7 @@ import static jakarta.persistence.TemporalType.TIMESTAMP;
 @Entity
 @NoArgsConstructor
 @Builder
+@AllArgsConstructor
 @Table(name="roles")
 public class Role extends AuditEntity {
 
@@ -35,9 +36,9 @@ public class Role extends AuditEntity {
     @Column(name="description", nullable = false)
     private String description;
 
-
-    @OneToOne(mappedBy = "role")
-    private User user;
+//
+//    @OneToOne(mappedBy = "role")
+//    private User user;
 
     @Column(name="status")
     private String status;
@@ -46,7 +47,6 @@ public class Role extends AuditEntity {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.user = user;
         this.status = status;
     }
 }
