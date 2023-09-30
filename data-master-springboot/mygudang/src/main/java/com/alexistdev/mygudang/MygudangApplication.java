@@ -1,5 +1,6 @@
 package com.alexistdev.mygudang;
 
+import com.alexistdev.mygudang.dao.RoleDAO;
 import com.alexistdev.mygudang.dto.MenuDTO;
 import com.alexistdev.mygudang.dto.RoleMenuDTO;
 import com.alexistdev.mygudang.entity.Menu;
@@ -59,14 +60,14 @@ public class MygudangApplication {
             names.put("Admin","Administrator");
             names.put("Admin Gudang","Admin Gudang Input Stock");
             names.put("Admin PO","Admin untuk membuat PO");
-//            for (Map.Entry<String, String> set : names.entrySet()) {
-//                Role role = new Role();
-//                role.setName(set.getKey());
-//                role.setDescription(set.getValue());
-//                role.setCreatedBy("System");
-//                role.setModifiedBy("System");
-//                roleService.save(role);
-//            }
+            for (Map.Entry<String, String> set : names.entrySet()) {
+                RoleDAO role = new RoleDAO();
+                role.setName(set.getKey());
+                role.setDescription(set.getValue());
+                role.setCreatedBy("System");
+                role.setModifiedBy("System");
+                roleService.save(role);
+            }
         };
     }
 

@@ -54,7 +54,7 @@ public class RoleServiceImplement implements RoleService {
 
         Optional<Role> cekRole = roleRepository.findByName(roleDAO.getName());
         if(cekRole.isPresent()){
-            throw  new RuntimeException("Already registered");
+            throw  new DuplicatException("Already registered");
         }
         Date now = new Date();
         Role role = new Role();
