@@ -6,9 +6,12 @@ import com.alexistdev.mygudang.exception.DuplicatException;
 import com.alexistdev.mygudang.response.CommonPaging;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RoleService {
     Role save(RoleDAO role) throws DuplicatException;
+
+    Optional<Role> update(RoleDAO role, String id) throws Exception;
 
 //    Role getByName(String name) throws Exception;
 

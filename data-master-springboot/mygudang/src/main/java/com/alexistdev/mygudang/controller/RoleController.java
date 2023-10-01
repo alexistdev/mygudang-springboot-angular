@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.Optional;
 
 
 @RestController
@@ -40,26 +41,35 @@ public class RoleController {
         ResponseData<Role> responseData = new ResponseData<>();
         responseData.setStatus(false);
         try{
-            RoleDAO insertRole = new RoleDAO();
-            insertRole.setName(roleDao.getName());
-            insertRole.setDescription(roleDao.getDescription());
-            insertRole.setCreatedBy(roleDao.getCreatedBy());
-            insertRole.setModifiedBy(roleDao.getModifiedBy());
-            insertRole.setStatus("1");
-            Role result =roleService.save(insertRole);
-
+            Role result =roleService.save(roleDao);
             responseData.setStatus(true);
             responseData.setData(result);
             responseData.setMessages("Data berhasil dibuat!");
             return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.CREATED);
-//        }catch (DuplicatException e){
-//            responseData.setMessages(e.getMessage());
-//            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             responseData.setMessages(e.getMessage());
             return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
         }
+    }
 
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<?> update(@Valid @RequestBody RoleDAO roleDAO, @PathVariable String id){
+        ResponseData<Optional<Role>> responseData = new ResponseData<>();
+        responseData.setStatus(false);
+        try{
+            Optional<Role> result =roleService.update(roleDAO,id);
+            if(result.isEmpty()){
+                responseData.setMessages("Data tidak ditemukan!");
+                return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
+            }
+            responseData.setStatus(true);
+            responseData.setData(result);
+            responseData.setMessages("Data berhasil diperbaharui!");
+            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.CREATED);
+        } catch (Exception e) {
+            responseData.setMessages(e.getMessage());
+            return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping(value = GET_LIST_ROLE)

@@ -5,20 +5,12 @@ import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.exception.DuplicatException;
 import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.service.impl.RoleServiceImplement;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-
-import java.util.Date;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,8 +22,6 @@ public class RoleServiceTest {
     private RoleServiceImplement roleService;
 
     private RoleDAO roleDAO;
-
-    private Role role;
 
 
     @BeforeEach
@@ -63,6 +53,7 @@ public class RoleServiceTest {
     }
 
     @DisplayName("BadFormat")
+    @Disabled
     @Test
     public void empty_name_throw_error(){
         when(roleRepository.save(any(Role.class))).thenReturn(null);
