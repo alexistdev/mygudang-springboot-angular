@@ -7,8 +7,12 @@ public class MasterConstant {
         public static final String FAILED = "X06";
         public static final String FAILED_DESC = "Failed";
 
-        public Response() {
+        public static final String DATA_NOT_FOUND = "Not Found";
+        public static final String SUCCESS_UPDATED = "Data has been updated!";
+        public static final String DUPLICATE = "Already registered !";
+        public static final String SYSTEM = "SYSTEM";
 
-        }
+
+
     }
 }

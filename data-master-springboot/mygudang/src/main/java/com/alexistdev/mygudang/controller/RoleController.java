@@ -4,7 +4,7 @@ package com.alexistdev.mygudang.controller;
 import com.alexistdev.mygudang.dao.RoleDAO;
 import com.alexistdev.mygudang.dto.ResponseData;
 import com.alexistdev.mygudang.entity.Role;
-import com.alexistdev.mygudang.exception.DuplicatException;
+import com.alexistdev.mygudang.master.MasterConstant;
 import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.response.CommonPaging;
 import com.alexistdev.mygudang.response.CommonResponsePaging;
@@ -44,7 +44,7 @@ public class RoleController {
             Role result =roleService.save(roleDao);
             responseData.setStatus(true);
             responseData.setData(result);
-            responseData.setMessages("Data berhasil dibuat!");
+            responseData.setMessages(MasterConstant.Response.SUCCESS_DESC);
             return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.CREATED);
         } catch (Exception e) {
             responseData.setMessages(e.getMessage());
@@ -57,14 +57,14 @@ public class RoleController {
         ResponseData<Optional<Role>> responseData = new ResponseData<>();
         responseData.setStatus(false);
         try{
-            Optional<Role> result =roleService.update(roleDAO,id);
+            Optional<Role> result = roleService.update(roleDAO,id);
             if(result.isEmpty()){
-                responseData.setMessages("Data tidak ditemukan!");
+                responseData.setMessages(MasterConstant.Response.DATA_NOT_FOUND);
                 return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.BAD_REQUEST);
             }
             responseData.setStatus(true);
             responseData.setData(result);
-            responseData.setMessages("Data berhasil diperbaharui!");
+            responseData.setMessages(MasterConstant.Response.SUCCESS_UPDATED);
             return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.CREATED);
         } catch (Exception e) {
             responseData.setMessages(e.getMessage());

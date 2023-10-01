@@ -4,6 +4,7 @@ import com.alexistdev.mygudang.controller.RoleController;
 import com.alexistdev.mygudang.dao.RoleDAO;
 import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.exception.DuplicatException;
+import com.alexistdev.mygudang.master.MasterConstant;
 import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.response.CommonPaging;
 import com.alexistdev.mygudang.service.RoleService;
@@ -52,7 +53,8 @@ public class RoleServiceImplement implements RoleService {
 
         Optional<Role> cekRole = roleRepository.findByName(roleDAO.getName());
         if(cekRole.isPresent()){
-            throw  new DuplicatException("Already registered");
+            String name = cekRole.map(Role::getName).orElse(null);
+            throw  new DuplicatException(name);
         }
         Date now = new Date();
         Role role = new Role();
@@ -68,11 +70,11 @@ public class RoleServiceImplement implements RoleService {
     }
 
     @Override
-    public Optional<Role> update(RoleDAO roleDAO, String id) throws Exception {
+    public Optional<Role> update(RoleDAO roleDAO, String id) {
         Optional<Role> roleData = roleRepository.findById(id);
         roleData.ifPresent(roleValue->{
             Date now = new Date();
-            roleValue.setModifiedBy("Admin");
+            roleValue.setModifiedBy(MasterConstant.Response.SYSTEM);
             roleValue.setName(roleDAO.getName());
             roleValue.setDescription(roleDAO.getDescription());
             roleValue.setUpdatedAt(now);
