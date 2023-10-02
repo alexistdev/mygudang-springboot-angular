@@ -5,6 +5,7 @@ import com.alexistdev.mygudang.dao.RoleDAO;
 import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.entity.User;
 import com.alexistdev.mygudang.exception.DuplicatException;
+import com.alexistdev.mygudang.master.MasterConstant;
 import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.response.CommonPaging;
 import com.alexistdev.mygudang.service.RoleService;
@@ -12,7 +13,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,9 +52,10 @@ public class RoleServiceImplement implements RoleService {
     public Role save(RoleDAO roleDAO) throws DuplicatException
     {
 
-        Role cekRole = roleRepository.findByName(roleDAO.getName()).orElse(null);
-        if(cekRole != null){
-            throw  new RuntimeException("Already registered");
+        Optional<Role> cekRole = roleRepository.findByName(roleDAO.getName());
+        if(cekRole.isPresent()){
+            String name = cekRole.map(Role::getName).orElse(null);
+            throw  new DuplicatException(name);
         }
         Date now = new Date();
         Role role = new Role();
@@ -67,6 +68,20 @@ public class RoleServiceImplement implements RoleService {
         role.setUpdatedAt(now);
         roleRepository.save(role);
         return role;
+    }
+
+    @Override
+    public Optional<Role> update(RoleDAO roleDAO, String id) {
+        Optional<Role> roleData = roleRepository.findById(id);
+        roleData.ifPresent(roleValue->{
+            Date now = new Date();
+            roleValue.setModifiedBy(MasterConstant.Response.SYSTEM);
+            roleValue.setName(roleDAO.getName());
+            roleValue.setDescription(roleDAO.getDescription());
+            roleValue.setUpdatedAt(now);
+            roleRepository.save(roleValue);
+        });
+        return roleData;
     }
 
     @Override
