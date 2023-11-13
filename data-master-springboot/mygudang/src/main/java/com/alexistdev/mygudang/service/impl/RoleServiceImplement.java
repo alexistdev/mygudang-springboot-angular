@@ -48,13 +48,13 @@ public class RoleServiceImplement implements RoleService {
     }
 
     @Override
-    public Role save(RoleDAO roleDAO) throws DuplicatException
+    public Role save(RoleDAO roleDAO) throws RuntimeException
     {
 
         Optional<Role> cekRole = roleRepository.findByName(roleDAO.getName());
         if(cekRole.isPresent()){
             String name = cekRole.map(Role::getName).orElse(null);
-            throw  new DuplicatException(name);
+            throw  new RuntimeException(name+ "Already Registered");
         }
         Date now = new Date();
         Role role = new Role();

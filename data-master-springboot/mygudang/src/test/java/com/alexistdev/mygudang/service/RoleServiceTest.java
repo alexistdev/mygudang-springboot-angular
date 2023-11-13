@@ -47,18 +47,7 @@ public class RoleServiceTest {
     public void duplicate_role_name_throw_errors(){
         Role role = Role.builder().name("test").description("test description").build();
         when(roleRepository.findByName(anyString())).thenReturn(Optional.of(role));
-        Assertions.assertThrows(DuplicatException.class, () -> {
-            roleService.save(roleDAO);
-        });
-    }
-
-    @DisplayName("BadFormat")
-    @Disabled
-    @Test
-    public void empty_name_throw_error(){
-        when(roleRepository.save(any(Role.class))).thenReturn(null);
-        roleDAO.setName(null);
-        Assertions.assertThrows(Exception.class, () -> {
+        Assertions.assertThrows(RuntimeException.class, () -> {
             roleService.save(roleDAO);
         });
     }
