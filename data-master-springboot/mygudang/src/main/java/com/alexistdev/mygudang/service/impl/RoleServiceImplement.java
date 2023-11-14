@@ -3,7 +3,6 @@ package com.alexistdev.mygudang.service.impl;
 import com.alexistdev.mygudang.controller.RoleController;
 import com.alexistdev.mygudang.dao.RoleDAO;
 import com.alexistdev.mygudang.entity.Role;
-import com.alexistdev.mygudang.exception.DuplicatException;
 import com.alexistdev.mygudang.master.MasterConstant;
 import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.response.CommonPaging;
