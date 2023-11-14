@@ -59,10 +59,12 @@ public class RoleServiceTest {
         });
     }
 
+    @DisplayName("Update service Test")
     @Test
-    public void update_role_should_return_role_test(){
+    public void update_role_test(){
        //prepare
         Role role = new Role();
+        role.setName("testing");
         role.setId("3eb547ec-1b18-4e1d-acf9-1239d37fa31c");
         lenient().when(roleRepository.findById(role.getId())).thenReturn(Optional.of(role));
 
@@ -71,6 +73,7 @@ public class RoleServiceTest {
 
         //assertion
         Assertions.assertNotNull(updatedRole);
-        Assertions.assertEquals(role.getId(),updatedRole.orElse(role).getId());
+        assert updatedRole.orElse(null) != null;
+        Assertions.assertSame(updatedRole.orElse(null).getName(),roleDAO.getName());
     }
 }
