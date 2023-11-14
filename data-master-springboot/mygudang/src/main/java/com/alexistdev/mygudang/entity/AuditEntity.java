@@ -3,6 +3,7 @@ package com.alexistdev.mygudang.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Temporal;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,6 +15,7 @@ import static jakarta.persistence.TemporalType.TIMESTAMP;
 @Getter
 @Setter
 @MappedSuperclass
+@AllArgsConstructor
 public class AuditEntity {
 
     @CreatedDate

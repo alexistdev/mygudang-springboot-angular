@@ -17,8 +17,6 @@ import static jakarta.persistence.TemporalType.TIMESTAMP;
 @Setter
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Table(name="roles")
 public class Role extends AuditEntity {
 
@@ -38,6 +36,14 @@ public class Role extends AuditEntity {
 
     @Column(name="status")
     private String status;
+
+    @Builder
+    public Role(String name, String description, String status, Date createdAt, String createdBy, Date updatedAt, String modifiedBy) {
+        super(createdAt, updatedAt, createdBy, modifiedBy);
+        this.name = name;
+        this.description = description;
+        this.status = status;
+    }
 
 
 }

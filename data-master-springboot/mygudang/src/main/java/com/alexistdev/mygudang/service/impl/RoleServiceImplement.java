@@ -57,14 +57,15 @@ public class RoleServiceImplement implements RoleService {
             throw  new RuntimeException(name+ "Already Registered");
         }
         Date now = new Date();
-        Role role = new Role();
-        role.setCreatedBy(roleDAO.getCreatedBy());
-        role.setModifiedBy(roleDAO.getModifiedBy());
-        role.setStatus("1");
-        role.setName(roleDAO.getName());
-        role.setDescription(roleDAO.getDescription());
-        role.setCreatedAt(now);
-        role.setUpdatedAt(now);
+        Role role = Role.builder()
+                        .name(roleDAO.getName())
+                        .description(roleDAO.getDescription())
+                        .status("1")
+                        .createdBy(roleDAO.getCreatedBy())
+                        .modifiedBy(roleDAO.getModifiedBy())
+                        .createdAt(now)
+                        .updatedAt(now)
+                        .build();
         roleRepository.save(role);
         return role;
     }
