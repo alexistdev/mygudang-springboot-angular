@@ -2,22 +2,16 @@ package com.alexistdev.mygudang.service;
 
 import com.alexistdev.mygudang.dao.RoleDAO;
 import com.alexistdev.mygudang.entity.Role;
-import com.alexistdev.mygudang.exception.DuplicatException;
 import com.alexistdev.mygudang.repository.RoleRepository;
 import com.alexistdev.mygudang.service.impl.RoleServiceImplement;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import java.util.Optional;
-import java.util.UUID;
 
 @ExtendWith(MockitoExtension.class)
 public class RoleServiceTest {
@@ -29,7 +23,6 @@ public class RoleServiceTest {
     private RoleServiceImplement roleService;
 
     private RoleDAO roleDAO;
-
 
     @BeforeEach
     public void setup() {
@@ -62,18 +55,22 @@ public class RoleServiceTest {
     @DisplayName("Update service Test")
     @Test
     public void update_role_test(){
-       //prepare
         Role role = new Role();
         role.setName("testing");
         role.setId("3eb547ec-1b18-4e1d-acf9-1239d37fa31c");
         lenient().when(roleRepository.findById(role.getId())).thenReturn(Optional.of(role));
-
-        //testing
         Optional<Role> updatedRole = roleService.update(roleDAO,role.getId());
-
-        //assertion
         Assertions.assertNotNull(updatedRole);
         assert updatedRole.orElse(null) != null;
         Assertions.assertSame(updatedRole.orElse(null).getName(),roleDAO.getName());
     }
+    @Test
+    public void find_by_id_should_return_role() throws Exception{
+        Role role = Role.builder().name("test").description("test description").build();
+        role.setId("3eb547ec-1b18-4e1d-acf9-1239d37fa31c");
+        lenient().when(roleRepository.findById(role.getId())).thenReturn(Optional.of(role));
+        Role getRole = roleService.getById("3eb547ec-1b18-4e1d-acf9-1239d37fa31c");
+        Assertions.assertSame(role.getName(),getRole.getName());
+    }
+
 }
