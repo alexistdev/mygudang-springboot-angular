@@ -18,25 +18,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api/roles")
+@RequestMapping("/v1")
 public class RoleController {
 
     private Logger logger = LoggerFactory.getLogger(RoleController.class);
 
     public static final String GET_LIST_ROLE = "/list";
+    public static final String ROLE_POST = "/role";
     @Autowired
     private RoleService roleService;
 
     @Autowired
     private RoleRepository roleRepository;
 
-    @PostMapping
+    @PostMapping(value = ROLE_POST)
     public ResponseEntity<?> create(@Valid @RequestBody RoleDAO roleDao){
         ResponseData<Role> responseData = new ResponseData<>();
         responseData.setStatus(false);
@@ -52,7 +51,7 @@ public class RoleController {
         }
     }
 
-    @PatchMapping(value = "/{id}")
+    @PatchMapping(value = ROLE_POST+"/{id}")
     public ResponseEntity<?> update(@Valid @RequestBody RoleDAO roleDAO, @PathVariable String id){
         ResponseData<Optional<Role>> responseData = new ResponseData<>();
         responseData.setStatus(false);

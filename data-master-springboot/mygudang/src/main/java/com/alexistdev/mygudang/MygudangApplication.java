@@ -61,12 +61,14 @@ public class MygudangApplication {
             names.put("Admin Gudang","Admin Gudang Input Stock");
             names.put("Admin PO","Admin untuk membuat PO");
             for (Map.Entry<String, String> set : names.entrySet()) {
-                RoleDAO role = new RoleDAO();
-                role.setName(set.getKey());
-                role.setDescription(set.getValue());
-                role.setCreatedBy("System");
-                role.setModifiedBy("System");
-                roleService.save(role);
+                RoleDAO roleDAO = RoleDAO.builder()
+                .name(set.getKey())
+                .description(set.getValue())
+                .createdBy("System")
+                .modifiedBy("System")
+                .status("1")
+                .build();
+                roleService.save(roleDAO);
             }
         };
     }

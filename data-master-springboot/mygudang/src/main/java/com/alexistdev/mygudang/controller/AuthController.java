@@ -1,11 +1,10 @@
 package com.alexistdev.mygudang.controller;
 
+import com.alexistdev.mygudang.dao.AuthDAO;
 import com.alexistdev.mygudang.dao.MenuDAO;
-import com.alexistdev.mygudang.dto.LoginDTO;
 import com.alexistdev.mygudang.dto.LoginResDTO;
 import com.alexistdev.mygudang.dto.ResponseData;
 import com.alexistdev.mygudang.entity.Menu;
-import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.entity.RoleMenu;
 import com.alexistdev.mygudang.entity.User;
 import com.alexistdev.mygudang.service.RoleMenuService;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -45,29 +45,30 @@ public class AuthController {
     }
 
     @PostMapping(value = LOGIN)
-    public ResponseEntity<ResponseData<LoginResDTO>> doLogin(@RequestBody LoginDTO user) throws Exception {
+    public ResponseEntity<ResponseData<LoginResDTO>> doLogin(@RequestBody AuthDAO authDAO) throws Exception {
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
         ResponseData<LoginResDTO> responseData = new ResponseData<>();
-        User whoIam = userservice.findByEmail(user.getUn());
+        User whoIam = userservice.findByEmail(authDAO.getUsername());
+        responseData.setStatus(false);
+        responseData.setMessages(resourceBundle.getString("failed"));
+        responseData.setData(null);
         if (whoIam != null) {
-            if (userservice.authenticateLogin(user.getPw(), whoIam.getPassword())) {
-                LoginResDTO loginResDTO = new LoginResDTO();
-                loginResDTO.setId(whoIam.getId());
-                loginResDTO.setName(whoIam.getName());
-                loginResDTO.setEmail(whoIam.getEmail());
-                loginResDTO.setPhone(whoIam.getPhone());
-                loginResDTO.setIsActive(whoIam.getIsActive());
-                loginResDTO.setMenuList(getDataMenuList(whoIam));
-                loginResDTO.setRoleId(whoIam.getId());
+            if (userservice.authenticateLogin(authDAO.getPassword(), whoIam.getPassword())) {
+                LoginResDTO loginResDTO = LoginResDTO.builder()
+                        .id(whoIam.getId())
+                        .name(whoIam.getName())
+                        .email(whoIam.getEmail())
+                        .phone(whoIam.getPhone())
+                        .isActive(whoIam.getIsActive())
+                        .menuList(getDataMenuList(whoIam))
+                        .roleId(whoIam.getId())
+                        .build();
                 responseData.setStatus(true);
-                responseData.setMessages("Data berhasil didapatkan");
+                responseData.setMessages(resourceBundle.getString("success"));
                 responseData.setData(loginResDTO);
                 return ResponseEntity.ok(responseData);
             }
         }
-
-        responseData.setStatus(false);
-        responseData.setMessages("Gagal");
-        responseData.setData(null);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
     }
 
