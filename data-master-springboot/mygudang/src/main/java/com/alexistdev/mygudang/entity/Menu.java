@@ -1,13 +1,18 @@
 package com.alexistdev.mygudang.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+
+import java.util.Date;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name="menus")
 public class Menu extends AuditEntity  {
     private static final long serialVersionUID = 1L;
@@ -33,5 +38,13 @@ public class Menu extends AuditEntity  {
     @Column(name="order_no", nullable = false)
     private int order;
 
-
+    @Builder
+    public Menu(Date createdAt, Date updatedAt, String createdBy, String modifiedBy, String name, String label, String url, String description, int order) {
+        super(createdAt, updatedAt, createdBy, modifiedBy);
+        this.name = name;
+        this.label = label;
+        this.url = url;
+        this.description = description;
+        this.order = order;
+    }
 }

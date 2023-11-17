@@ -7,6 +7,7 @@ import com.alexistdev.mygudang.entity.Menu;
 import com.alexistdev.mygudang.entity.Permission;
 import com.alexistdev.mygudang.entity.Role;
 import com.alexistdev.mygudang.entity.User;
+import com.alexistdev.mygudang.request.MenuRequest;
 import com.alexistdev.mygudang.service.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,32 +77,32 @@ public class MygudangApplication {
     @Bean
     CommandLineRunner seedMenu() {
         return args -> {
-//            List<MenuDTO> listData = new ArrayList<>();
-//
-//            MenuDTO insertMenu = new MenuDTO();
-//            insertMenu.setName("Dashboard");
-//            insertMenu.setUrl("/staff/dashboard");
-//            insertMenu.setLabel("bx bx-home-alt");
-//            insertMenu.setDescription("Halaman dashboard");
-//            insertMenu.setOrder(1);
-//            insertMenu.setCreatedBy("System");
-//            insertMenu.setModifiedBy("System");
-//
-//            MenuDTO insertMenu2 = new MenuDTO();
-//            insertMenu2.setName("Role");
-//            insertMenu2.setUrl("/staff/roles");
-//            insertMenu2.setLabel("bx bx-data");
-//            insertMenu2.setDescription("Halaman roles");
-//            insertMenu2.setOrder(2);
-//            insertMenu2.setCreatedBy("System");
-//            insertMenu2.setModifiedBy("System");
-//
-//
-//            listData.add(insertMenu);
-//            listData.add(insertMenu2);
-//            for(MenuDTO listData2: listData){
-//                menuService.save(listData2);
-//            }
+            List<MenuRequest> listData = new ArrayList<>();
+
+            MenuRequest insertMenu = new MenuRequest();
+            insertMenu.setName("Dashboard");
+            insertMenu.setUrl("/staff/dashboard");
+            insertMenu.setLabel("bx bx-home-alt");
+            insertMenu.setDescription("Halaman dashboard");
+            insertMenu.setOrder(1);
+            insertMenu.setCreatedBy("System");
+            insertMenu.setModifiedBy("System");
+
+            MenuRequest insertMenu2 = new MenuRequest();
+            insertMenu2.setName("Role");
+            insertMenu2.setUrl("/staff/roles");
+            insertMenu2.setLabel("bx bx-data");
+            insertMenu2.setDescription("Halaman roles");
+            insertMenu2.setOrder(2);
+            insertMenu2.setCreatedBy("System");
+            insertMenu2.setModifiedBy("System");
+
+
+            listData.add(insertMenu);
+            listData.add(insertMenu2);
+            for(MenuRequest listData2: listData){
+                menuService.save(listData2);
+            }
         };
     }
 
