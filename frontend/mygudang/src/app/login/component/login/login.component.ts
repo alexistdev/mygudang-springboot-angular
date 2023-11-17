@@ -40,10 +40,11 @@ export class LoginComponent implements OnInit, AfterViewInit{
       this.loginForm.disable();
       this.loginService.doUserLogin(this.loginForm.controls['emailUn'].value, this.loginForm.controls['pw'].value).subscribe({
           next: (res) => {
-            if(!res){
-              this.error = true;
+            if(res){
+              this.error = false;
+              this.router.navigate(['/staff/dashboard'])
             }
-            this.router.navigate(['/staff/dashboard'])
+            this.error = true;
           },
           error: () => {
             this.error = true;
