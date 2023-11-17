@@ -30,18 +30,21 @@ public class UserServiceImplement implements UserService {
 
     @Override
     public User save(User users) throws Exception {
-        User insertUser = new User();
         Date now = new Date();
-        if(roleRepository.findById(users.getRole().getId()) == null){
-            throw  new Exception("role tidak ditemukan !");
-        }
-        insertUser.setName(users.getName());
-        insertUser.setEmail(users.getEmail());
-        insertUser.setPassword(passwordEncoder.encode(users.getPassword()));
-        insertUser.setPhone(users.getPhone());
-        insertUser.setCreatedAt(now);
-        insertUser.setUpdatedAt(now);
-        insertUser.setRole(users.getRole());
+
+        User insertUser = User.builder()
+                .name(users.getName())
+                .email(users.getEmail())
+                .password(passwordEncoder.encode(users.getPassword()))
+                .phone(users.getPhone())
+                .createdAt(now)
+                .updatedAt(now)
+                .role(users.getRole())
+                .isActive(1)
+                .createdBy("System")
+                .modifiedBy("System")
+                .build();
+
         return userRepository.save(insertUser);
     }
 

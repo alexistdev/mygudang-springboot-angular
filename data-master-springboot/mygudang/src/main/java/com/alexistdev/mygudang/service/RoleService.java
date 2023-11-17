@@ -13,7 +13,6 @@ public interface RoleService {
 
     Optional<Role> update(RoleDAO role, String id) throws Exception;
 
-//    Role getByName(String name) throws Exception;
 
     Role getById(String id) throws Exception;
 

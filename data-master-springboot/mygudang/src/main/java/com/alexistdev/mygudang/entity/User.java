@@ -2,15 +2,19 @@ package com.alexistdev.mygudang.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "users")
 public class User extends AuditEntity implements Serializable {
 
@@ -42,4 +46,14 @@ public class User extends AuditEntity implements Serializable {
     @Column(name = "isActive")
     private int isActive;
 
+    @Builder
+    public User(Date createdAt, Date updatedAt, String createdBy, String modifiedBy, Role role, String name, String email, String phone, String password, int isActive) {
+        super(createdAt, updatedAt, createdBy, modifiedBy);
+        this.role = role;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.isActive = isActive;
+    }
 }

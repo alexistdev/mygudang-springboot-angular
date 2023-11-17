@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/v1/auth")
 public class AuthController {
     public static final String LOGIN = "/login";
 

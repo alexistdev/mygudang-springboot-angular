@@ -108,15 +108,15 @@ public class MygudangApplication {
     @Bean
     CommandLineRunner seedUser() {
         return args -> {
-//            Role admin = roleService.getByName("Admin");
-//            User user = new User();
-//            user.setName("Alex");
-//            user.setPassword("1234");
-//            user.setIsActive(1);
-//            user.setPhone("082371408678");
-//            user.setEmail("alexistdev@gmail.com");
-//            user.setRole(admin);
-//            userService.save(user);
+            List<Role> admin = roleService.getAll();
+            User user = new User();
+            user.setName("Alex");
+            user.setPassword("1234");
+            user.setIsActive(1);
+            user.setPhone("082371408678");
+            user.setEmail("alexistdev@gmail.com");
+            user.setRole(admin.get(0));
+            userService.save(user);
         };
     }
 

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @RestController
 @RequestMapping("/api/users")
@@ -24,9 +25,10 @@ public class UserController {
     public ResponseEntity<?> create(@Valid @RequestBody User user){
         ResponseData<User> responseData = new ResponseData<>();
         try{
-            User data = userservice.save(user);
-            responseData.setData(data);
-            responseData.setMessages(message);
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("message");
+            User userData = userservice.save(user);
+            responseData.setData(userData);
+            responseData.setMessages(resourceBundle.getString("success"));
             return new ResponseEntity<ResponseData<?>>(responseData, HttpStatus.CREATED);
         }catch (Exception e){
             responseData.setStatus(false);
