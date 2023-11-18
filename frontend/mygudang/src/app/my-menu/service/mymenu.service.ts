@@ -17,6 +17,17 @@ export class MymenuService {
 
   getUserMenu() {
     let myMenu: MenuItem[] = JSON.parse(this.localStorageService.getItem("menu"));
+
+    myMenu.sort(function(a,b){
+      if(a.order > b.order){
+        return 1;
+      }
+      if(a.order < b.order){
+        return -1;
+      }
+      return 0;
+    });
     return of(myMenu);
   }
+
 }

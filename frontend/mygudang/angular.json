@@ -25,9 +25,29 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/template/rocker/assets/css/pace.min.css",
+              "src/assets/template/rocker/assets/plugins/simplebar/css/simplebar.css",
+              "src/assets/template/rocker/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css",
+              "src/assets/template/rocker/assets/plugins/metismenu/css/metisMenu.min.css",
+              "src/assets/template/rocker/assets/css/pace.min.css",
+              "src/assets/template/rocker/assets/css/bootstrap.min.css",
+              "src/assets/template/rocker/assets/css/bootstrap-extended.css",
+              "src/assets/template/rocker/assets/css/app.css",
+              "src/assets/template/rocker/assets/css/icons.css",
+              "src/assets/template/rocker/assets/css/semi-dark.css",
+              "src/assets/template/rocker/assets/css/header-colors.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/template/rocker/assets/js/bootstrap.bundle.min.js",
+              "src/assets/template/rocker/assets/js/jquery.min.js",
+              "src/assets/template/rocker/assets/plugins/simplebar/js/simplebar.min.js",
+              "src/assets/template/rocker/assets/plugins/metismenu/js/metisMenu.min.js",
+              "src/assets/template/rocker/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js",
+              "src/assets/template/rocker/assets/plugins/chartjs/js/chart.js",
+              "src/assets/template/rocker/assets/js/app.js",
+              "src/assets/template/rocker/assets/js/pace.min.js"
+            ]
           },
           "configurations": {
             "production": {

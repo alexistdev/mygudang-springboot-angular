@@ -10,12 +10,14 @@ export class MenuItem {
   url: string;
   description: string;
   name: string
+  order: number
 
 
-  constructor(label: string, url: string, description: string, name: string) {
+  constructor(label: string, url: string, description: string, name: string, order: number) {
     this.label = label;
     this.url = url;
     this.description = description;
     this.name = name;
+    this.order = order;
   }
 }
