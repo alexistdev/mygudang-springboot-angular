@@ -3,13 +3,18 @@ package com.alexistdev.mygudang.entity;
 import com.alexistdev.mygudang.dao.MenuDAO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+
+import java.util.Date;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "role_menu")
 public class RoleMenu extends AuditEntity {
 
@@ -28,4 +33,10 @@ public class RoleMenu extends AuditEntity {
     @JoinColumn(name = "menu_id",nullable = false)
     private Menu menu;
 
+    @Builder
+    public RoleMenu(Date createdAt, Date updatedAt, String createdBy, String modifiedBy, Role role, Menu menu) {
+        super(createdAt, updatedAt, createdBy, modifiedBy);
+        this.role = role;
+        this.menu = menu;
+    }
 }

@@ -1,25 +1,17 @@
 package com.alexistdev.mygudang.service;
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
 @SpringBootTest
-//@ContextConfiguration(classes = {RoleService.class,UserService.class})
 public class UserRoleServiceTest {
 
-//
-//
-//    @Autowired
-//    private UserRoleService userRoleService;
-////
-//    @Autowired
-//    private RoleService roleService;
-//    //
-//    @Autowired
-//    private UserService userService;
-//
-//    @Test
-//    public void insertUserRoleSuccessTest() throws Exception {
+
+    @Test
+    @Disabled
+    public void insertUserRoleSuccessTest() throws Exception {
 //        Role insertRole = new Role();
 //        insertRole.setName("Administrator");
 //        insertRole.setDescription("Halaman Administrator");
@@ -41,7 +33,7 @@ public class UserRoleServiceTest {
 //        insertUserRoleDTO.setCreatedBy("System");
 //        insertUserRoleDTO.setModifiedBy("System");
 //        Assertions.assertNotNull(userRoleService.save(insertUserRoleDTO));
-//    }
+    }
 
 
 }

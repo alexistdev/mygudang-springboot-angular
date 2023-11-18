@@ -24,6 +24,7 @@ public class MenuControllerTest {
     private final String uri = "/api/menu";
 
     @Test
+    @Disabled
     public void addMenuTest() throws Exception{
 //        MockMvc mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 //        MenuRequest insertMenu = new MenuRequest();

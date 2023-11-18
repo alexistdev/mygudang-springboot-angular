@@ -3,6 +3,7 @@ package com.alexistdev.mygudang.controller;
 import com.alexistdev.mygudang.config.Helper;
 import com.alexistdev.mygudang.dao.RoleDAO;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class RoleControllerTest {
     private final Helper helper = new Helper();
     private RoleDAO roleDAO;
 
-    private final String uri = "/api/roles";
+    private final String uri = "/v1/role";
 
     @BeforeEach
     void setUp() {
@@ -33,11 +34,12 @@ public class RoleControllerTest {
                 .modifiedBy("system test")
                 .name("test")
                 .description("test description")
+                .status("1")
                 .build();
     }
 
     @Test
-    @DisplayName("add_role_test")
+    @DisplayName("post_role_test")
     public void add_role_test_should_return_http_code() throws Exception {
         MockMvc mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
