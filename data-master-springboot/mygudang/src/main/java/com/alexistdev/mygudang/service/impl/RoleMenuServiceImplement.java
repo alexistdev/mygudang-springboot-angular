@@ -19,13 +19,16 @@ public class RoleMenuServiceImplement implements RoleMenuService {
     @Override
     public RoleMenu save(RoleMenuDTO roleMenuDTO) throws Exception {
         Date now = new Date();
-        RoleMenu insertRoleMenu = new RoleMenu();
-        insertRoleMenu.setRole(roleMenuDTO.getRole());
-        insertRoleMenu.setMenu(roleMenuDTO.getMenu());
-        insertRoleMenu.setCreatedAt(now);
-        insertRoleMenu.setUpdatedAt(now);
-        insertRoleMenu.setCreatedBy(roleMenuDTO.getCreatedBy());
-        insertRoleMenu.setModifiedBy(roleMenuDTO.getModifiedBy());
+
+        RoleMenu insertRoleMenu = RoleMenu.builder()
+                        .role(roleMenuDTO.getRole())
+                        .menu(roleMenuDTO.getMenu())
+                        .createdAt(now)
+                        .updatedAt(now)
+                        .createdBy(roleMenuDTO.getCreatedBy())
+                        .modifiedBy(roleMenuDTO.getModifiedBy())
+                        .build();
+
         return roleMenuRepository.save(insertRoleMenu);
     }
 

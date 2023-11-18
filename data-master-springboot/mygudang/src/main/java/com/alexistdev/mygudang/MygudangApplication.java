@@ -124,21 +124,21 @@ public class MygudangApplication {
     @Bean
     CommandLineRunner seedRoleMenu() {
         return args -> {
-//            Role admin = roleService.getByName("Admin");
-//            List<Menu> menus = menuService.getAll();
-//            RoleMenuDTO roleMenuDTO = new RoleMenuDTO();
-//            roleMenuDTO.setRole(admin);
-//            roleMenuDTO.setMenu(menus.get(0));
-//            roleMenuDTO.setCreatedBy("System");
-//            roleMenuDTO.setModifiedBy("System");
-//            roleMenuService.save(roleMenuDTO);
-//
-//            RoleMenuDTO roleMenuDTO2 = new RoleMenuDTO();
-//            roleMenuDTO2.setRole(admin);
-//            roleMenuDTO2.setMenu(menus.get(1));
-//            roleMenuDTO2.setCreatedBy("System");
-//            roleMenuDTO2.setModifiedBy("System");
-//            roleMenuService.save(roleMenuDTO2);
+            List<Role> admin = roleService.getAll();
+            List<Menu> menus = menuService.getAll();
+            RoleMenuDTO roleMenuDTO = new RoleMenuDTO();
+            roleMenuDTO.setRole(admin.get(0));
+            roleMenuDTO.setMenu(menus.get(0));
+            roleMenuDTO.setCreatedBy("System");
+            roleMenuDTO.setModifiedBy("System");
+            roleMenuService.save(roleMenuDTO);
+
+            RoleMenuDTO roleMenuDTO2 = new RoleMenuDTO();
+            roleMenuDTO2.setRole(admin.get(0));
+            roleMenuDTO2.setMenu(menus.get(1));
+            roleMenuDTO2.setCreatedBy("System");
+            roleMenuDTO2.setModifiedBy("System");
+            roleMenuService.save(roleMenuDTO2);
         };
     }
 
