@@ -1,55 +1,65 @@
-<div class="wrapper">
-  <div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
-        <div class="col mx-auto">
-          <div class="card mb-0">
-            <div class="card-body">
-              <div class="p-4">
-                <div class="mb-3 text-center">
-                  <img src="assets/template/rocker/assets/images/logo-icon.png" width="60" alt="" />
-                </div>
-                <div class="text-center mb-4">
-                  <h5 class="">MyGudang V.1.0</h5>
-                  <p class="mb-0">Please log in to your account</p>
-                </div>
-                <div class="form-body">
-                  <form class="row g-3" [formGroup]="loginForm">
-                    <div class="col-12 justify-content-center" *ngIf="error">
-                      <div class="alert alert-danger border-0 bg-danger show fade">
-                        <div class="text-light">INVALID LOGIN!</div>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <label for="inputEmailAddress" class="form-label">Email</label>
-                      <input type="email" formControlName="emailUn" class="form-control" id="inputEmailAddress" placeholder="jhon@example.com">
-                    </div>
-                    <div class="col-12">
-                      <label for="inputChoosePassword" class="form-label">Password</label>
-                      <div class="input-group" id="show_hide_password">
-                        <input type="password" formControlName="pw" class="form-control border-end-0" id="inputChoosePassword" value="12345678" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
-                      </div>
-                    </div>
-                    <div class="col-md-12 text-end">	<a href="authentication-forgot-password.html">Forgot Password ?</a>
-                    </div>
-                    <div class="col-12">
-                      <div class="d-grid">
-                        <button type="submit" (click)="doLogin()" class="btn btn-primary">Login</button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+<div class="bg-overlay"></div>
+<div class="wrapper-page">
+  <div class="container-fluid p-0">
+    <div class="card">
+      <div class="card-body">
 
-              </div>
-            </div>
+        <div class="text-center mt-4">
+          <div class="mb-3">
+            <a href="#" class="auth-logo">
+              <img src="assets/template/upcube/assets/images/logo-dark.png" height="30" class="logo-dark mx-auto" alt="">
+              <img src="assets/template/upcube/assets/images/logo-light.png" height="30" class="logo-light mx-auto" alt="">
+            </a>
           </div>
         </div>
+
+        <h4 class="text-muted text-center font-size-18"><b>Sign In</b></h4>
+
+        <div class="p-3">
+          <form class="form-horizontal mt-3"  [formGroup]="loginForm">
+
+            <div class="form-group mb-3 row">
+              <div class="col-12">
+                <input class="form-control" formControlName="emailUn" type="text" required="" placeholder="Username">
+              </div>
+            </div>
+
+            <div class="form-group mb-3 row">
+              <div class="col-12">
+                <input class="form-control" formControlName="pw" type="password" required="" placeholder="Password">
+              </div>
+            </div>
+
+            <div class="form-group mb-3 row">
+              <div class="col-12">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1">
+                  <label class="form-label ms-1" for="customCheck1">Remember me</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mb-3 text-center row mt-3 pt-1">
+              <div class="col-12">
+                <button class="btn btn-info w-100 waves-effect waves-light" (click)="doLogin()" type="submit">Log In</button>
+              </div>
+            </div>
+
+            <div class="form-group mb-0 row mt-2">
+              <div class="col-sm-7 mt-3">
+                <a href="#" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
+              </div>
+              <div class="col-sm-5 mt-3">
+                <a href="#" class="text-muted"><i class="mdi mdi-account-circle"></i> Create an account</a>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- end -->
       </div>
-      <!--end row-->
+      <!-- end cardbody -->
     </div>
+    <!-- end card -->
   </div>
+  <!-- end container -->
 </div>
-<div class="app-container p-2 my-2">
-</div>
-<div class="header-message-list"></div>
-<div class="header-notifications-list"></div>
