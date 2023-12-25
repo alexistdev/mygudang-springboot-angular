@@ -8,6 +8,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {LocalStorageService} from "./config/service/local-storage.service";
 import {HomeModule} from "./home/home.module";
 import {AdministrationModule} from "./administration/administration.module";
+import {MyMenuModule} from "./my-menu/my-menu.module";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {AdministrationModule} from "./administration/administration.module";
     AppRouteModule,
     LoginModule,
     HttpClientModule,
-    HomeModule
+    HomeModule,
+    MyMenuModule
   ],
   providers: [
     LocalStorageService

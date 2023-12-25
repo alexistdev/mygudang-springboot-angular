@@ -25,18 +25,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "src/assets/template/upcube/assets/css/bootstrap.min.css",
-              "src/assets/template/upcube/assets/css/icons.min.css",
-              "src/assets/template/upcube/assets/css/app.min.css"
+              "src/assets/template/material-dashboard/assets/css/material-dashboard.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.js",
-              "src/assets/template/upcube/assets/libs/bootstrap/js/bootstrap.bundle.min.js",
-              "node_modules/metismenu/dist/metisMenu.js",
-              "src/assets/template/upcube/assets/libs/simplebar/simplebar.min.js",
-              "src/assets/template/upcube/assets/libs/node-waves/waves.min.js",
-              "src/assets/template/upcube/assets/js/app.js"
+              "src/assets/template/material-dashboard/assets/js/core/popper.min.js",
+              "src/assets/template/material-dashboard/assets/js/core/bootstrap.min.js",
+              "src/assets/template/material-dashboard/assets/js/plugins/perfect-scrollbar.min.js",
+              "src/assets/template/material-dashboard/assets/js/plugins/smooth-scrollbar.min.js",
+              "src/assets/template/material-dashboard/assets/js/material-dashboard.min.js"
             ]
           },
           "configurations": {

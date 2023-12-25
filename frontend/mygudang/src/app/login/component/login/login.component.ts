@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit, AfterViewInit{
           next: (res) => {
             if(res){
               this.error = false;
-              this.router.navigate(['/staff/dashboard'])
+              this.router.navigate(['/staff'])
             }
             this.error = true;
           },

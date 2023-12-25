@@ -14,28 +14,23 @@ import {RoleAdminComponent} from "./component/role-admin/role-admin.component";
 
 const ADMINISTRATION_PATH = [
   {
-    path: 'staff',
-    component: HomeStaffComponent,
-    children: [
-      {
-        path: '',
-        component: DashboardComponent
-      },
-      {
-        path: 'dashboard',
-        component: DashboardComponent
-      },
-      {
-        path: 'roles',
-        component: RoleAdminComponent
-      },
-    ]
+    path: 'staff/dashboard',
+    component: DashboardComponent
+    // children: [
+    //   {
+    //     path: '',
+    //     component: DashboardComponent
+    //   },
+    //   {
+    //     path: '/roles',
+    //     component: RoleAdminComponent
+    //   },]
   },
 ];
 
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forChild(ADMINISTRATION_PATH)],
+  // imports: [RouterModule.forChild(ADMINISTRATION_PATH)],
   // imports:[],
   exports: [
     RouterModule

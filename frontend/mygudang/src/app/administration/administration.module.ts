@@ -19,7 +19,7 @@ import { RoleAdminComponent } from './component/role-admin/role-admin.component'
 
   ],
   exports: [
-    DashboardComponent
+
   ],
     imports: [
         CommonModule,
